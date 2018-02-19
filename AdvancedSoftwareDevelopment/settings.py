@@ -29,7 +29,6 @@ ALLOWED_HOSTS = ['localhost']
 
 LOGIN_REDIRECT_URL = 'index'
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -55,6 +54,7 @@ ROOT_URLCONF = 'AdvancedSoftwareDevelopment.urls'
 
 
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+
 
 TEMPLATES = [
     {
@@ -123,3 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
