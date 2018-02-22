@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect
 
 
 def index(request):
+    if not request.user.is_authenticated:
+        return redirect('login.html')
     return render(request, 'index.html')
 
 
@@ -17,7 +19,9 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('home')
+            return redirect('index.html')
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
+
+
