@@ -13,8 +13,7 @@ Choose both Docker Machine and Compose for the install. We ran into some problem
 
 Open the Docker Quickstart Terminal, and let it do its thing. (If you didn't download Git together with Docker, you will have to point to the correct location for the Git Bash). You should get a message saying "Docker is up and running!" - now you're good to go.
 
-The command `docker-machine ls` should show a `default` VM created for you, with a given IP address (ex: *192.168.99.100*). 
-Run the command `docker-machine.exe env default` and run the command that is shown (`$ eval $(...)`). Your VM should now be ready for use. 
+Go to the location of the project (`cd C:/Users/...`). The command `docker-machine ls` should show a `default` VM created for you, with a given IP address (ex: *192.168.99.100*). Run the command `docker-machine.exe env default` and run the command that is shown (`$ eval $(...)`). Your VM should now be ready for use. 
 Run the command `docker-compose up`. This will take some time. After a while, you will see the message:
 
 `Starting development server at http://0.0.0.0:8000/`  
