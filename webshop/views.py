@@ -40,6 +40,15 @@ class ProductListView(LoginRequiredMixin, ListView):
     context_object_name = 'product-list'
     login_url = 'login'
 
+    def get_queryset(self):
+        return Product.objects.all()
+
+
+class ProductDetailView(LoginRequiredMixin, ListView):
+    model = Product
+    template_name = 'product-details.html'
+    context_object_name = 'product-details'
+    login_url = 'login'
 
     def get_queryset(self):
         return Product.objects.all()
