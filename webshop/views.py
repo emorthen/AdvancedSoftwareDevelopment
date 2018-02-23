@@ -1,6 +1,9 @@
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from django.views.generic.list import ListView
+from webshop.models import Product
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
@@ -30,3 +33,13 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
+class ProductListView(LoginRequiredMixin, ListView):
+
+    model = Product
+    template_name = 'product-list.html'
+    context_object_name = 'product-list'
+    login_url = 'login'
+
+
+    def get_queryset(self):
+        return Product.objects.all()

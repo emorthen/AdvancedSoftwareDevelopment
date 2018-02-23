@@ -16,11 +16,16 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from webshop import views
+from webshop.views import ProductListView
 
 urlpatterns = [
     url('^', include('django.contrib.auth.urls')),
     url('', include('webshop.urls')),
     url(r'^signup/$', views.signup, name='signup'),
-    url(r'^logout/$', views.logout_view, name='logout'),
+    url(r'^logout/$', views.logout_view, {'next_page': 'login'}, name='logout'),
     url(r'^admin/', admin.site.urls),
+    url('product/', ProductListView.as_view(), name='product-list'),
+   # url(r'^product/$', ListView.as_view(), {'queryset': Product.objects.all()}, name='object_list'),
+    #url(r'^product/(?P<slug>[-\w]+)/$', ListView.as_view, 'object_detail', {'queryset': Product.objects.all()})
 ]
+

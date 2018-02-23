@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
+{% include 'product-list.html' %}
 
 {% block content %}
 <h1>Welcome to the Webshop!</h1>
+
+    <a href="{% url 'product-list' %}">Start shopping</a>
+
+
  {% endblock %}
+

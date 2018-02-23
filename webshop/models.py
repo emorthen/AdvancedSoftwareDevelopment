@@ -8,10 +8,10 @@ class Product(models.Model):
     # id automatically added by django
     # productID = models.CharField(max_length=10, primary_key=True)
     # category = models.ForeignKey('Catalog', related_name='products')
-    category = models.ForeignKey('Catalog', related_name='products')
+    category = models.ForeignKey('Catalog', related_name='products', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=150)
-    desription = models.TextField()
+    description = models.TextField()
     photo = models.ImageField(upload_to='product_photo', blank=True)
     manufacturer = models.CharField(max_length=300, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
@@ -28,8 +28,8 @@ class Catalog(models.Model):
 class ProductDetail(models.Model):
     #  The "ProductDetail" model represents information unique to a specific product.
     # This is a generic design that can be used to extend the information in the "Product" model with extra details.
-    product = models.ForeignKey('Product', related_name='details')
-    attribute = models.ForeignKey('ProductAttribute')
+    product = models.ForeignKey('Product', related_name='details', on_delete=models.CASCADE)
+    attribute = models.ForeignKey('ProductAttribute', on_delete=models.CASCADE)
     value = models.CharField(max_length=500)
     description = models.TextField(blank=True)
 
