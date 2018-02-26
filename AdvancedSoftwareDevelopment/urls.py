@@ -20,7 +20,7 @@ from webshop import views
 urlpatterns = [
     url('^', include('django.contrib.auth.urls')),
     url('', include('webshop.urls')),
-    url(r'^sinup/$', views.signup, name='signup'),
+    url(r'^signup/$', views.signup, name='signup'),
     url(r'^customlogout/$', views.logout_view, name='customlogout'),
     url(r'^admin/', admin.site.urls),
 ]
