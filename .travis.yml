@@ -10,3 +10,4 @@ install:
 
 before_script:
   - docker-compose up --build -d
+
