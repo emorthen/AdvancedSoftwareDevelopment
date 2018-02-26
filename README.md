@@ -1,5 +1,5 @@
 # AdvancedSoftwareDevelopment
-A smooth webshop to buy the things you need.
+A smooth webshop to buy and sell things and such
 
 ## General requirements:
 - Python3
