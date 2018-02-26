@@ -2,7 +2,7 @@
 
 ## General requirements:
 - Python3
-- Django (terminal: pip install django)(remove?) 
+- Django: `pip install django`, if necessary 
 
 ## For OSx:
 - Download Docker: https://store.docker.com/editions/community/docker-ce-desktop-mac.
