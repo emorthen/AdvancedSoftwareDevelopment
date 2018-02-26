@@ -18,7 +18,7 @@ from django.contrib import admin
 from webshop import views
 
 urlpatterns = [
-    url('^', include('django.contrib.auth.urls')),
+    ul('^', include('django.contrib.auth.urls')),
     url('', include('webshop.urls')),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^customlogout/$', views.logout_view, name='customlogout'),
