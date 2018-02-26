@@ -10,4 +10,3 @@ services:
   
 script:
   - docker-compose up --build -d
-
