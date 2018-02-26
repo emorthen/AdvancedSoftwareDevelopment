@@ -4,8 +4,9 @@
 - Python3
 - Django (terminal: pip install django)(remove?) 
 
-## For MAC:
-OSx: https://store.docker.com/editions/community/docker-ce-desktop-mac.
+## For OSx:
+- Download Docker: https://store.docker.com/editions/community/docker-ce-desktop-mac.
+- `docker-compose up web` 
 
 ## For Windows 10 (not Pro):
 You will have to install Docker Toolbox (https://docs.docker.com/toolbox/toolbox_install_windows/). 
