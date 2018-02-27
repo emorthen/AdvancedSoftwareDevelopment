@@ -9,6 +9,7 @@ A smooth webshop to buy and sell things and such
 - Download Docker: https://store.docker.com/editions/community/docker-ce-desktop-mac.
 - Run Docker
 - From root of project: `docker-compose up web` 
+- Run with localhost:8000 
 
 ## For Windows 10 (not Pro):
 You will have to install Docker Toolbox (https://docs.docker.com/toolbox/toolbox_install_windows/). 
