@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^customlogout/$', views.logout_view, name='customlogout'),
     url(r'^admin/', admin.site.urls),
+    url(r'^cart/$', views.get_cart, name='cart'),
 ]

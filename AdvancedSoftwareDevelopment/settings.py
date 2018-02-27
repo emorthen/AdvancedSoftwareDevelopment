@@ -32,6 +32,8 @@ LOGIN_REDIRECT_URL = 'index'
 # Application definition
 
 INSTALLED_APPS = [
+    'cart',
+    'webshop',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
