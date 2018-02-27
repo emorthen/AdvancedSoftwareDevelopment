@@ -12,7 +12,7 @@ install:
   - docker-compose --version
 
 script:
-  - docker-compose build
-
+  - docker-compose up --build -d
 after_script:
   - docker-compose down
+
