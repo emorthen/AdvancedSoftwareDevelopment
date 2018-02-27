@@ -7,7 +7,13 @@ python:
 
 services:
   - docker
-  
+
+install:
+  - docker-compose --version
+
 script:
   - docker-compose up --build -d
+
+after_script:
+  - docker-compose down
 
