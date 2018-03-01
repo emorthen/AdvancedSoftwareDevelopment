@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^product/$', ProductListView.as_view(), name='product-list'),
     url(r'^product/(?P<productID>\d+)/$', ProductDetailView.as_view(), name='product-details'),
     url(r'^cart/$', views.get_cart, name='cart'),
+    url(r'^add_to_cart/$', views.add_to_cart, name='add_to_cart')
 ]
 
