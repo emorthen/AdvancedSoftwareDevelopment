@@ -3,53 +3,22 @@ from datetime import datetime
 
 # Create your models here.
 
+class ItemManager(models.Manager):
+    def get(self, *args, **kwargs):
+        if 'product' in kwargs:
+            kwargs['content_type'] = ContentType.objects.get_for_model(type(kwargs['product']))
+            kwargs['object_id'] = kwargs['product'].pk
+            del(kwargs['product'])
+        return super(ItemManager, self).get(*args, **kwargs)
 
 class Product(models.Model):
     # id automatically added by django
-    # productID = models.CharField(max_length=10, primary_key=True)
-    # category = models.ForeignKey('Catalog', related_name='products')
-    category = models.ForeignKey('Catalog', related_name='products', on_delete=models.CASCADE)
+    productID = models.CharField(max_length=10, primary_key=True)
     name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=150)
-    description = models.TextField()
-    photo = models.ImageField(upload_to='product_photo', blank=True)
-    manufacturer = models.CharField(max_length=300, blank=True)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    brand = models.CharField(max_length=100)
+    height = models.PositiveIntegerField()
+    country = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=18, decimal_places=2)
+    description = models.CharField(max_length=500)
 
-
-class Catalog(models.Model):
-    name = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=150)
-    publisher = models.CharField(max_length=300)
-    description = models.TextField()
-    pub_date = models.DateTimeField(default=datetime.now)
-
-
-class ProductDetail(models.Model):
-    #  The "ProductDetail" model represents information unique to a specific product.
-    # This is a generic design that can be used to extend the information in the "Product" model with extra details.
-    product = models.ForeignKey('Product', related_name='details', on_delete=models.CASCADE)
-    attribute = models.ForeignKey('ProductAttribute', on_delete=models.CASCADE)
-    value = models.CharField(max_length=500)
-    description = models.TextField(blank=True)
-
-    def __unicode__(self):
-        return u'%s: %s - %s' % (self.product, self.attribute, self.value)
-
-
-class ProductAttribute(models.Model):
-    # Represents a class of feature found across a set of products.
-    # Does not store any data values related to the attribute, but only describes what kind of a
-    # product feature we are trying to capture.
-    # Possible attributes include things such as materials, colors, sizes..
-    name = models.CharField(max_length=300)
-    description = models.TextField(blank=True)
-
-    def __unicode__(self):
-        return u'%s' % self.name
-
-# class CatalogCategory(models.Model):
-#     catalog = models.ForeignKey('Catalog', related_name='categories')
-#     parent = models.ForeignKey('self', blank=True, null=True, related_name='children')
-#     name = models.CharField(max_length=150)
-#     description = models.TextField(blank=True)
+    #objects = ItemManager()

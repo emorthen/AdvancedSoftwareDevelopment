@@ -25,7 +25,7 @@ SECRET_KEY = '(=p-vwv!z_208%=m@3x5u#wj*%!+*tyitwxz))re3+hn@1#^oy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.99.101', '192.168.99.100']
 
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'login'
@@ -33,6 +33,8 @@ LOGOUT_REDIRECT_URL = 'login'
 # Application definition
 
 INSTALLED_APPS = [
+    'cart',
+    'webshop',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

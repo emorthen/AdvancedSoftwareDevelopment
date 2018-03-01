@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^logout/$', views.logout_view, {'next_page': 'login'}, name='logout'),
     url(r'^admin/', admin.site.urls),
     url(r'^product/$', ProductListView.as_view(), name='product-list'),
-    url(r'^product/(?P<slug>[-\w]+)/$', ProductDetailView.as_view(), name='product-details')
+    url(r'^product/(?P<slug>[-\w]+)/$', ProductDetailView.as_view(), name='product-details'),
+    url(r'^cart/$', views.get_cart, name='cart'),
 ]
 
