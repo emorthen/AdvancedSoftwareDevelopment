@@ -9,9 +9,9 @@ A smooth webshop to buy and sell rockets. To the moon!
 - Run Docker
 - From root of project:  
 -- `pip3 install django`  
+-- `pip3 install django-cart`  
 -- `python3 manage.py migrate --run-syncdb`  
 -- `python3 manage.py migrate`  
--- `pip3 install django-cart`  
 -- `python3 manage.py makemigrations cart`  
 -- `python3 manage.py migrate cart`  
 -- `docker-compose up`  
