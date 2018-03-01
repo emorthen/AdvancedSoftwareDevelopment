@@ -5,6 +5,7 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from cart.cart import Cart
 from webshop.models import Product
+
 # Create your views here.
 
 
@@ -58,11 +59,16 @@ class ProductListView(LoginRequiredMixin, ListView):
         return Product.objects.all()
 
 
-class ProductDetailView(LoginRequiredMixin, ListView):
-    model = Product
-    template_name = 'product-details.html'
-    context_object_name = 'product-details'
-    login_url = 'login'
+def product_detail_view(request, productID):
+    productID = Product.objects.get(productID=productID)
 
-    def get_queryset(self):
-        return Product.objects.all()
+    return render(request, 'product-details.html', {'object': productID})
+
+# class ProductDetailView(LoginRequiredMixin, ListView):
+#     model = Product
+#     template_name = 'product-details.html'
+#     context_object_name = 'product-details'
+#     login_url = 'login'
+#
+#     def get_queryset(self, product_id):
+#         return Product.objects.get(productID=product_id)
