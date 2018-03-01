@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from webshop import views
-from webshop.views import ProductListView, ProductDetailView
+from webshop.views import ProductListView
 
 urlpatterns = [
     url('^', include('django.contrib.auth.urls')),
@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^logout/$', views.logout_view, {'next_page': 'login'}, name='logout'),
     url(r'^admin/', admin.site.urls),
     url(r'^product/$', ProductListView.as_view(), name='product-list'),
-    url(r'^product/(?P<productID>\d+)/$', ProductDetailView.as_view(), name='product-details'),
+    url(r'^product/(?P<productID>\d+)/$', views.product_detail_view, name='product-details'),
     url(r'^cart/$', views.get_cart, name='cart'),
     url(r'^add_to_cart/$', views.add_to_cart, name='add_to_cart')
 ]
