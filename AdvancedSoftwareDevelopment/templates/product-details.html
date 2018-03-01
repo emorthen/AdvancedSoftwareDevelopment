@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>{{ object.name }}</h1>
-        <p>Description: {{ object.description }}</p>
+        <p>Height: {{ object.height }} m</p>
+        <p>Brand: {{ object.brand }}</p>
+        <p>Country: {{ object.country }}</p>
         <p>Price: ${{ object.price }}</p>
+        <p>Description: {{ object.description }}</p>
+
 {#        <a href={% url 'add_to_cart' object.objectID 1 %}>Add to cart</a>#}
         <hr/>
         <p><a href="{% url 'product-list' %}">Back to product list</a></p>
