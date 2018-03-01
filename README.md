@@ -11,10 +11,11 @@ A smooth webshop to buy and sell rockets. To the moon!
 -- `pip3 install django`  
 -- `pip3 install django-cart`  
 -- `python3 manage.py migrate --run-syncdb`  
--- `python3 manage.py migrate`  
 -- `python3 manage.py makemigrations cart`  
 -- `python3 manage.py migrate cart`  
+-- `python manage.py createsuperuser`, to add admin users for /admin
 -- `docker-compose up`  
+
 - Run in web browser on localhost:8000
 
 ## For Windows 10 (not Pro):
