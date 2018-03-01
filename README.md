@@ -7,15 +7,15 @@ A smooth webshop to buy and sell rockets. To the moon!
 ## For OSx:
 - Download Docker: https://store.docker.com/editions/community/docker-ce-desktop-mac.
 - Run Docker
-- From root of project: 
-     `pip3 install django`  
-     `python3 manage.py migrate --run-syncdb`  
-     `python3 manage.py migrate`  
-     `pip3 install django-cart`  
-     `python3 manage.py makemigrations cart`  
-     `python3 manage.py migrate cart`  
-     `docker-compose up`  
-- Run in web browser on localhost:8000 
+- From root of project:  
+-- `pip3 install django`  
+-- `python3 manage.py migrate --run-syncdb`  
+-- `python3 manage.py migrate`  
+-- `pip3 install django-cart`  
+-- `python3 manage.py makemigrations cart`  
+-- `python3 manage.py migrate cart`  
+-- `docker-compose up`  
+- Run in web browser on localhost:8000
 
 ## For Windows 10 (not Pro):
 * Install Docker Toolbox (https://docs.docker.com/toolbox/toolbox_install_windows/). 
