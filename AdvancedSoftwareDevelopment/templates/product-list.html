@@ -4,11 +4,8 @@
 
     <ul>
         {% for object in object_list %}
-        <li><a href="{{ object.get_absolute_url }}"> {{ object.name }} </a>
+        <li><a href=""> {{ object.name }} </a>
             <p>{{ object.description }}</p>
-            <p>../../{{ object.photo }}</p>
-
-            <img src="../../{{ object.photo }}"/>
 
         </li>
 
