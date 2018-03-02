@@ -20,7 +20,7 @@ from webshop.views import ProductListView
 
 urlpatterns = [
     url('^', include('django.contrib.auth.urls')),
-    url('', include('webshop.urls')),
+    url('', include('webshop.urls'), name='index'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^logout/$', views.logout_view, {'next_page': 'login'}, name='logout'),
     url(r'^admin/', admin.site.urls),

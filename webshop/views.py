@@ -34,8 +34,8 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
 
-def add_to_cart(request, product_id, quantity):
-    product = Product.objects.get(productID=product_id)
+def add_to_cart(request, productID, quantity):
+    product = Product.objects.get(productID=productID)
     cart = Cart(request)
     cart.add(product, product.price, quantity)
 
@@ -60,9 +60,9 @@ class ProductListView(LoginRequiredMixin, ListView):
 
 
 def product_detail_view(request, productID):
-    productID = Product.objects.get(productID=productID)
+    product = Product.objects.get(productID=productID)
 
-    return render(request, 'product-details.html', {'object': productID})
+    return render(request, 'product-details.html', {'object': product})
 
 # class ProductDetailView(LoginRequiredMixin, ListView):
 #     model = Product
