@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Products:</h2>
+    <h2>Products</h2>
 
-    <ul>
         {% for object in object_list %}
-            <li><a href="{% url 'product-details' object.productID %}"> {{ object.name }} </a>
-            <p>${{ object.price }}</p>
 
-        </li>
-            
+            <div class="card" style="width: 18rem; margin: 20px">
+                <div class="card-body">
+                    <h5 class="card-title">{{ object.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">${{ object.price }}</h6>
+                    <p class="card-text">{{ object.description }}</p>
+                    <a class="card-link" href="{% url 'product-details' object.productID %}">View</a>
+                    <a class="card-link" href="{% url 'add_to_cart' object.productID %}">Add to cart</a>
+                </div>
+            </div>
+
+
             {% empty %}
             <li>No articles yet.</li>
         {% endfor %}
-    </ul>
  {% endblock %}
