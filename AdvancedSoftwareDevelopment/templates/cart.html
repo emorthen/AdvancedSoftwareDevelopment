@@ -1,22 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<a href="/">Back to homepage</a>
-<h1>Cart</h1>
+<h2>Cart</h2>
 {% if cart.count > 0 %}
-    <table>
-        <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Total price</th>
-        </tr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Total price</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
 
         {% for item in cart %}
         <tr>
             <td>{{ item.product.name }}</td>
             <td>{{ item.quantity }}</td>
             <td>{{ item.total_price }}</td>
+            <td><a class="btn btn-danger" href="{% url 'remove_from_cart' item.object_id %}"><i class="fas fa-trash-alt fa-xs"></i></a></td>
         </tr>
+
         {% endfor %}
     </table>
 {% else %}

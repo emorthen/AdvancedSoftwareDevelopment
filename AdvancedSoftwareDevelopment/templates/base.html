@@ -3,19 +3,55 @@
 {% load staticfiles %}
 <html>
     <head>
-        <title>Webshop</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <title>Sky is not the Limit</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{% static 'css/webshop.css' %}">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     </head>
     <body>
-      <div class="page-header loginout">
-          <a href="{% url 'index' %}">Home</a>
-          <a href="/logout">Logout</a>
-          <a href="/cart">Shopping cart</a>
+{#          <nav class="navbar navbar-dark bg-dark">#}
+{#            <div class="collapse navbar-collapse">#}
+{#                <div class="navbar-header">#}
+{#                    <a class="navbar-brand" href={% url 'index' %}>Sky is not the Limit</a>#}
+{#                 </div>#}
+{#                <ul class="collapse navbar-collapse">#}
+{#                    <li ><a href={% url 'index' %}>Home</a></li>#}
+{#                    <li><a href={% url 'product-list' %}>Shop spaceships</a></li>#}
+{#                    <li><a href={% url 'cart' %}>Shopping cart</a></li>#}
+{#                </ul>#}
+{#                <ul class="nav navbar-nav navbar-right">#}
+{#                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>#}
+{#                    <li><a href={% url 'logout' %}><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>#}
+{#                </ul>#}
+{#            </div>#}
+{#          </nav>#}
 
-      </div>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 20px">
+          <a class="navbar-brand" href={% url 'index' %}>Sky is not the limit</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href={% url 'index' %}>Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href={% url 'product-list' %}>Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href={% url 'cart' %}>Shopping cart</a>
+                    </li>
+                </ul>
+
+              <ul class="navbar-nav">
+                <li> <a class="nav-link" href={% url 'logout' %}><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+
+          </div>
+      </nav>
+
       <div class="content container">
           <div class="row">
               <div class="col-md-8">

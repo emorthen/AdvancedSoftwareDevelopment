@@ -1,13 +1,11 @@
 {% extends 'base.html' %}
-{% include 'product-list.html' %}
 
 <!-- Entry page for login -->
 
 {% block content %}
-<h1>Welcome to the Webshop!</h1>
+<h1>Sky is not the Limit!</h1>
 
-    <a href="{% url 'product-list' %}">Start shopping</a>
+    <button class="btn btn-primary" onclick="location.href={% url 'product-list' %}">Start shopping spaceships!</button>
 
-    <a href="/cart">View cart</a>
  {% endblock %}
 
