@@ -8,6 +8,7 @@
             <th>Product</th>
             <th>Quantity</th>
             <th>Total price</th>
+            <th>Remove</th>
         </tr>
 
         {% for item in cart %}
@@ -15,7 +16,9 @@
             <td>{{ item.product.name }}</td>
             <td>{{ item.quantity }}</td>
             <td>{{ item.total_price }}</td>
+            <td><a class="btn btn-danger" href="{% url 'remove_from_cart' item.object_id %}">Remove</a></td>
         </tr>
+
         {% endfor %}
     </table>
 {% else %}
