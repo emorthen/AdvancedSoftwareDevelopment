@@ -18,7 +18,7 @@
             <td>{{ item.product.name }}</td>
             <td>{{ item.quantity }}</td>
             <td>{{ item.total_price }}</td>
-            <td><a class="btn btn-danger" href="{% url 'remove_from_cart' item.object_id %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+            <td><a class="btn btn-danger" href="{% url 'remove_from_cart' item.object_id %}"><i class="fas fa-trash-alt fa-xs"></i></a></td>
         </tr>
 
         {% endfor %}

@@ -4,11 +4,11 @@
 
     <ul>
         {% for object in object_list %}
-        <li><a href="{% url 'product-details' object.productID %}"> {{ object.name }} </a>
+            <li><a href="{% url 'product-details' object.productID %}"> {{ object.name }} </a>
             <p>${{ object.price }}</p>
 
         </li>
-
+            
             {% empty %}
             <li>No articles yet.</li>
         {% endfor %}
