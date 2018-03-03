@@ -5,6 +5,9 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from cart.cart import Cart
 from webshop.models import Product
+from functools import reduce
+from django.db.models import Q
+import operator
 
 # Create your views here.
 
@@ -68,3 +71,23 @@ def product_detail_view(request, productID):
     product = Product.objects.get(id=productID)
 
     return render(request, 'product-details.html', {'object': product})
+
+
+class ProductSearchListView(ProductListView):
+    """
+    Display a Blog List page filtered by the search query.
+    """
+    paginate_by = 10
+
+    def get_queryset(self):
+        result = super(ProductSearchListView, self).get_queryset()
+
+        query = self.request.GET.get('q')
+        if query:
+            query_list = query.split()
+            result = result.filter(
+                reduce(operator.and_,
+                       (Q(brand__icontains=q) for q in query_list))
+                 )
+
+        return result
