@@ -6,6 +6,12 @@
         <p>Country: {{ object.country }}</p>
         <p>Price: ${{ object.price }}</p>
         <p>Description: {{ object.description }}</p>
+        {% if not object.discount == 'NONE' %}
+            <p class="card-text" style="color: darkred">Discount: {{ object.discount }}</p>
+            {% if not object.discount == '3 for 2' or not object.discount == '2 for 1' %}
+                <p>Discounted price: {{ object.get_discounted_price }}</p>
+            {% endif %}
+        {% endif %}
 
         <a class="btn btn-primary" href="{% url 'add_to_cart' object.id %}">Add to cart</a>
 
