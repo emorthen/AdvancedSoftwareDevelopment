@@ -2,8 +2,8 @@
 {% block content %}
     <h2>Products:</h2>
     <form method="get" action="{% url 'product_search_list_view' %}" accept-charset="utf-8">
-      <!--<input class="searchfield" id="priceSearchbox" name="q" type="text" placeholder="Search Price"> -->
-      <input class="searchfield" id="brandSescriptionSearchbox" name="q" type="text" placeholder="Search">
+      <!-- <input class="searchfield" id="priceSearchbox" name="q" type="number" placeholder="Price">-->
+      <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
       <button class="searchbutton" type="submit">
         <i class="fa fa-search"></i>
       </button>

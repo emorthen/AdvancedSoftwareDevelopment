@@ -86,14 +86,16 @@ class ProductSearchListView(ProductListView):
         if query:
             query_list = query.split()
             result = result.filter(
-                reduce(operator.or_,
+                reduce(operator.and_,
                        (Q(brand__icontains=q) for q in query_list)) |
-                reduce(operator.or_,
+                reduce(operator.and_,
                        (Q(description__icontains=q) for q in query_list)) |
-                reduce(operator.or_,
+                reduce(operator.and_,
                        (Q(name__icontains=q) for q in query_list)) |
-                reduce(operator.or_,
-                       (Q(country__icontains=q) for q in query_list))
+                reduce(operator.and_,
+                       (Q(country__icontains=q) for q in query_list)) |
+                reduce(operator.and_,
+                       (Q(price__icontains=q) for q in query_list))
                  )
 
         return result
