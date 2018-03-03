@@ -1,10 +1,29 @@
-{% extends 'signup-base.html' %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">    <meta charset="UTF-8">
+
 
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form>
+  <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4 login-form">
+            <h1>Sign up</h1>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <p>
+                        {{ field.label_tag }}<br>
+                        {{ field }}
+                        {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    </p>
+                {% endfor %}
+                <div class="form-group">
+                    <label>Already have an account? </label>
+                    <a href="{% url 'login' %}">Login</a>
+                </div>
+                <button class="btn btn-success btn-block" type="submit">Sign up</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
