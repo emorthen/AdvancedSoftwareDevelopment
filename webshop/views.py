@@ -34,15 +34,19 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
 
-def add_to_cart(request, productID, quantity):
+
+def add_to_cart(request, productID):
     product = Product.objects.get(productID=productID)
     cart = Cart(request)
-    cart.add(product, product.price, quantity)
+    cart.add(product, product.price, 1)
+    return render(request, 'cart.html', dict(cart=Cart(request)))
+
 
 def remove_from_cart(request, product_id):
     product = Product.objects.get(productID=product_id)
     cart = Cart(request)
     cart.remove(product)
+
 
 def get_cart(request):
     return render(request, 'cart.html', dict(cart=Cart(request)))
@@ -63,12 +67,3 @@ def product_detail_view(request, productID):
     product = Product.objects.get(productID=productID)
 
     return render(request, 'product-details.html', {'object': product})
-
-# class ProductDetailView(LoginRequiredMixin, ListView):
-#     model = Product
-#     template_name = 'product-details.html'
-#     context_object_name = 'product-details'
-#     login_url = 'login'
-#
-#     def get_queryset(self, product_id):
-#         return Product.objects.get(productID=product_id)

@@ -7,7 +7,7 @@
         <p>Price: ${{ object.price }}</p>
         <p>Description: {{ object.description }}</p>
 
-{#        <button class="btn btn-primary" onclick="href={% url 'add_to_cart' object.productID 1 %}" >Add to cart</button>#}
+        <a class="btn btn-primary" href="{% url 'add_to_cart' object.productID %}">Add to cart</a>
 
         <hr/>
 

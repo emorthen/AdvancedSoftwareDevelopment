@@ -5,7 +5,7 @@
     <ul>
         {% for object in object_list %}
         <li><a href="{% url 'product-details' object.productID %}"> {{ object.name }} </a>
-            <p>{{ object.description }}</p>
+            <p>${{ object.price }}</p>
 
         </li>
 
