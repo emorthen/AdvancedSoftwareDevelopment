@@ -20,19 +20,6 @@
 <form method="post" action="{% url 'login' %}">
 {% csrf_token %}
     <h1>Login</h1>
-    {% comment %}<table>
-        <tr>
-            <td>{{ form.username.label_tag }}</td>
-            <td>{{ form.username }}</td>
-        </tr>
-        <tr>
-            <td>{{ form.password.label_tag }}</td>
-            <td>{{ form.password }}</td>
-        </tr>
-    </table>{% endcomment %}
-
-
-
     <div class="form-group">
         <tr>
             <td>{{ form.username.label_tag }}</td>

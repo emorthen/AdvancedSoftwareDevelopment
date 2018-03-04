@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <h2>Cart</h2>
 {% if cart.count > 0 %}
     <table class="table table-striped">
@@ -23,7 +24,7 @@
         {% endfor %}
     </table>
 
-<a class="btn btn-primary" href="{% url 'Buy' %}">Buy</a>
+    <a class="btn btn-primary" href="{% url 'Buy' %}">Buy</a>
 {% else %}
     <p>Your cart is empty.</p>
 
