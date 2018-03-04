@@ -9,7 +9,7 @@
         {% if not object.discount == 'NONE' %}
             <p class="card-text" style="color: darkred">Discount: {{ object.discount }}</p>
             {% if not object.discount == '3 for 2' or not object.discount == '2 for 1' %}
-                <p>Discounted price: {{ object.get_discounted_price }}</p>
+                <p>Discounted price: ${{ discounted_price }}</p>
             {% endif %}
         {% endif %}
 

@@ -53,6 +53,15 @@ def get_cart(request):
     return render(request, 'cart.html', dict(cart=Cart(request)))
 
 
+def get_discounted_price(discount_string, total_price):
+    print('calculating discounted price')
+    discounted_price = total_price
+    if '%' in discount_string:
+        discount_percent = int(discount_string.split('%')[0])
+        discounted_price = int(total_price) * discount_percent / 100
+    return str(discounted_price)
+
+
 class ProductListView(LoginRequiredMixin, ListView):
 
     model = Product
@@ -66,5 +75,6 @@ class ProductListView(LoginRequiredMixin, ListView):
 
 def product_detail_view(request, productID):
     product = Product.objects.get(id=productID)
+    discounted_price = get_discounted_price(product.discount, product.price)
+    return render(request, 'product-details.html', {'object': product, 'discounted_price': discounted_price})
 
-    return render(request, 'product-details.html', {'object': product})
