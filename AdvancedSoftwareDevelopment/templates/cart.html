@@ -20,9 +20,11 @@
             <td>{{ item.total_price }}</td>
             <td><a class="btn btn-danger" href="{% url 'remove_from_cart' item.object_id %}"><i class="fas fa-trash-alt fa-xs"></i></a></td>
         </tr>
-
+    <td><a class="btn btn-danger" href="{% url 'buy' %}">Buy></a></td>
         {% endfor %}
     </table>
+
+
 {% else %}
     <p>Your cart is empty.</p>
 {% endif %}

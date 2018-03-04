@@ -48,6 +48,11 @@ def remove_from_cart(request, product_id):
     cart.remove(product)
     return redirect('cart')
 
+def remove_all_from_cart():
+    product = Product.objects
+    cart= Cart
+    cart.remove(product)
+    return redirect('purchase completed')
 
 def get_cart(request):
     return render(request, 'cart.html', dict(cart=Cart(request)))
