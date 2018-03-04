@@ -9,7 +9,7 @@
                     <h5 class="card-title">{{ object.name }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">${{ object.price }}</h6>
                     <p class="card-text">{{ object.description }}</p>
-                    {% if not object.discount == 'NONE' %}
+                    {% if not object.discount == '-' %}
                         <p class="card-text" style="color: darkred">Discount: {{ object.discount }}</p>
                     {% endif %}
                     <a class="card-link" href="{% url 'product-details' object.id %}">View</a>

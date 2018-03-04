@@ -8,6 +8,8 @@
             <tr>
                 <th>Product</th>
                 <th>Quantity</th>
+                <th>Unit price</th>
+                <th>Discount</th>
                 <th>Total price</th>
                 <th>Remove</th>
             </tr>
@@ -17,7 +19,13 @@
         <tr>
             <td>{{ item.product.name }}</td>
             <td>{{ item.quantity }}</td>
-            <td>{{ item.total_price }}</td>
+            <td>${{ item.product.price }}</td>
+            <td>{{ item.product.discount }}</td>
+            {% if not item.product.discount == '3 for 2' or not item.product.discount == '2 for 1' or not item.product.discount == '-' %}
+                <td>{{ discounted_price.item.product.id }}</td>
+            {% else %}
+                <td>{{ item.total_price }}</td>
+            {% endif %}
             <td><a class="btn btn-danger" href="{% url 'remove_from_cart' item.object_id %}"><i class="fas fa-trash-alt fa-xs"></i></a></td>
         </tr>
 
