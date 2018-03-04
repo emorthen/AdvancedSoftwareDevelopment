@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>{{ "Purchase completed" }}</h1>
-        <p>Height: {{ "Congratulations! Your purchase have been completed." }} m</p>
-        <hr/>
+        <p>Congratulations! Your purchase have been completed.</p>
+
+    <hr/>
 
         <p><button class="btn btn-primary" onclick="location.href={% url 'product-list' %}">Back to product list</button></p>
  {% endblock %}
