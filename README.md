@@ -15,7 +15,6 @@ A smooth webshop to buy and sell rockets. To the moon!
 -- `python3 manage.py migrate cart`  
 -- `python3 manage.py makemigrations webshop`  
 -- `python3 manage.py migrate webshop`  
-
 -- `python3 manage.py createsuperuser`, to add admin users for /admin  
 -- `docker-compose up`  
 
