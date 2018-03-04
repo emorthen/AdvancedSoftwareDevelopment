@@ -6,8 +6,10 @@ CART_ID = 'CART-ID'
 class ItemAlreadyExists(Exception):
     pass
 
+
 class ItemDoesNotExist(Exception):
     pass
+
 
 class Cart:
     def __init__(self, request):
@@ -68,7 +70,7 @@ class Cart:
             )
         except models.Item.DoesNotExist:
             raise ItemDoesNotExist
-        else: #ItemAlreadyExists
+        else:  # ItemAlreadyExists
             if quantity == 0:
                 item.delete()
             else:

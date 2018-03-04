@@ -6,6 +6,7 @@ import datetime
 from decimal import Decimal
 from cart import Cart
 
+
 class CartAndItemModelsTestCase(TestCase):
 
     def setUp(self):
@@ -55,7 +56,6 @@ class CartAndItemModelsTestCase(TestCase):
 
         cart_from_database = models.Cart.objects.get(pk=id)
         self.assertEquals(cart, cart_from_database)
-        
 
     def test_item_creation_and_association_with_cart(self):
         """
@@ -87,7 +87,6 @@ class CartAndItemModelsTestCase(TestCase):
                 "Unit price of the first item stored in the cart should equal 100")
         self.assertEquals(item_in_cart.quantity, 1, 
                 "The first item in cart should have 1 in it's quantity")
-
 
     def test_total_item_price(self):
         """
