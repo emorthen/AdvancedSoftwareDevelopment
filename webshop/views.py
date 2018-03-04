@@ -1,5 +1,6 @@
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -9,12 +10,9 @@ from functools import reduce
 from django.db.models import Q
 import operator
 
-# Create your views here.
 
-
+@login_required
 def index(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
     return render(request, 'index.html')
 
 
@@ -38,6 +36,7 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
+@login_required
 def add_to_cart(request, productID):
     product = Product.objects.get(id=productID)
     cart = Cart(request)
@@ -45,6 +44,7 @@ def add_to_cart(request, productID):
     return redirect('cart')
 
 
+@login_required
 def remove_from_cart(request, product_id):
     product = Product.objects.get(id=product_id)
     cart = Cart(request)
@@ -52,6 +52,7 @@ def remove_from_cart(request, product_id):
     return redirect('cart')
 
 
+@login_required
 def remove_all_from_cart(request):
     cart= Cart(request)
     cart.clear()
@@ -60,6 +61,14 @@ def remove_all_from_cart(request):
 
 def get_cart(request):
     return render(request, 'cart.html', dict(cart=Cart(request)))
+
+
+def get_discounted_price(discount_string, total_price):
+    discounted_price = total_price
+    if '%' in discount_string:
+        discount_percent = int(discount_string.split('%')[0])
+        discounted_price = int(total_price) - (int(total_price) * discount_percent / 100)
+    return str(discounted_price)
 
 
 class ProductListView(LoginRequiredMixin, ListView):
@@ -73,10 +82,11 @@ class ProductListView(LoginRequiredMixin, ListView):
         return Product.objects.all()
 
 
+@login_required
 def product_detail_view(request, productID):
     product = Product.objects.get(id=productID)
-
-    return render(request, 'product-details.html', {'object': product})
+    discounted_price = get_discounted_price(product.discount, product.price)
+    return render(request, 'product-details.html', {'object': product, 'discounted_price': discounted_price})
 
 
 class ProductSearchListView(ProductListView):
