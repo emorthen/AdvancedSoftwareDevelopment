@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Products</h2>
+    <h2>Products:</h2>
+    <form method="get" action="{% url 'product_search_list_view' %}" accept-charset="utf-8">
+      <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+      <input class="searchfield" id="minPrice" name="minprice" type="number" placeholder="Min Price">
+      <input class="searchfield" id="maxPrice" name="maxprice" type="number" placeholder="Max Price">
+      <button class="searchbutton" type="submit">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
 
         {% for object in object_list %}
 
