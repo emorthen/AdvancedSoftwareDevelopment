@@ -51,19 +51,14 @@ def remove_from_cart(request, product_id):
 
 @login_required
 def get_cart(request):
-    context_dict = dict(cart=Cart(request))
-
-    for item in context_dict['cart']:
-        if '%' in item.product.discount:
-            item.total_price = get_discounted_price(item.product.discount, item.total_price)
-    return render(request, 'cart.html', context_dict)
+    return render(request, 'cart.html', dict(cart=Cart(request)))
 
 
 def get_discounted_price(discount_string, total_price):
     discounted_price = total_price
     if '%' in discount_string:
         discount_percent = int(discount_string.split('%')[0])
-        discounted_price = int(total_price) * discount_percent / 100
+        discounted_price = int(total_price) - (int(total_price) * discount_percent / 100)
     return str(discounted_price)
 
 
