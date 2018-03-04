@@ -81,10 +81,11 @@ class ProductSearchListView(ProductListView):
 
     def get_queryset(self):
         result = super(ProductSearchListView, self).get_queryset()
-
-        query = self.request.GET.get('q')
-        if query:
-            query_list = query.split()
+        queryText = self.request.GET.get('q')
+        queryMinPrice = self.request.GET.get('minprice')
+        queryMaxPrice = self.request.GET.get('maxprice')
+        if queryText:
+            query_list = queryText.split()
             result = result.filter(
                 reduce(operator.and_,
                        (Q(brand__icontains=q) for q in query_list)) |
@@ -93,9 +94,12 @@ class ProductSearchListView(ProductListView):
                 reduce(operator.and_,
                        (Q(name__icontains=q) for q in query_list)) |
                 reduce(operator.and_,
-                       (Q(country__icontains=q) for q in query_list)) |
-                reduce(operator.and_,
-                       (Q(price__icontains=q) for q in query_list))
+                       (Q(country__icontains=q) for q in query_list))
                  )
+        if queryMinPrice:
+            result.filter(Q(price__gte=queryMinPrice))
+
+        if queryMaxPrice:
+            result.filter(Q(price__lte=queryMaxPrice))
 
         return result
