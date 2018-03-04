@@ -14,5 +14,7 @@ urlpatterns = [
     url(r'^cart/$', views.get_cart, name='cart'),
     url(r'^add_to_cart/(\d+)/$', views.add_to_cart, name='add_to_cart'),
     url(r'^remove_from_cart/(\d+)/$', views.remove_from_cart, name='remove_from_cart'),
-]
+    url(r'^product_search_list_view/$', views.ProductSearchListView.as_view(), name='product_search_list_view'),
+    url(r'^buy/$',views.remove_all_from_cart,name='Buy'),
 
+]

@@ -14,8 +14,6 @@
         {% endif %}
 
         <a class="btn btn-primary" href="{% url 'add_to_cart' object.id %}">Add to cart</a>
-
         <hr/>
-
         <p><button class="btn btn-primary" onclick="location.href={% url 'product-list' %}">Back to product list</button></p>
  {% endblock %}
