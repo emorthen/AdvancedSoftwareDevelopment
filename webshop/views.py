@@ -108,3 +108,4 @@ class ProductSearchListView(ProductListView):
 
         return result
 
+
