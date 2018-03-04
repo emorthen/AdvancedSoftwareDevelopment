@@ -3,14 +3,6 @@ from datetime import datetime
 
 # Create your models here.
 
-class ItemManager(models.Manager):
-    def get(self, *args, **kwargs):
-        if 'product' in kwargs:
-            kwargs['content_type'] = ContentType.objects.get_for_model(type(kwargs['product']))
-            kwargs['object_id'] = kwargs['product'].pk
-            del(kwargs['product'])
-        return super(ItemManager, self).get(*args, **kwargs)
-
 class Product(models.Model):
     # id automatically added by django
     #productID = models.CharField(max_length=10, primary_key=True)
@@ -48,5 +40,3 @@ class Product(models.Model):
     )
 
     discount = models.CharField(max_length=3, choices=DISCOUNT_CHOICES, default=NO_DISCOUNT)
-
-    #objects = ItemManager()
