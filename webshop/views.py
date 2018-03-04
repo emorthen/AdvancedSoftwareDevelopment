@@ -107,3 +107,5 @@ class ProductSearchListView(ProductListView):
             result = result.filter(Q(price__lte=queryMaxPrice))
 
         return result
+
+
