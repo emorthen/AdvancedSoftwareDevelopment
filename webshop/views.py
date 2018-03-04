@@ -74,6 +74,8 @@ class ProductListView(LoginRequiredMixin, ListView):
 
 
 def product_detail_view(request, productID):
+    if not request.user.is_authenticated:
+        return redirect('login')
     product = Product.objects.get(id=productID)
     discounted_price = get_discounted_price(product.discount, product.price)
     return render(request, 'product-details.html', {'object': product, 'discounted_price': discounted_price})
