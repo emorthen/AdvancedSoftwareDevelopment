@@ -8,15 +8,15 @@ A smooth webshop to buy and sell rockets. To the moon!
 - Download Docker: https://store.docker.com/editions/community/docker-ce-desktop-mac.
 - Run Docker
 - From root of project:  
--- `pip3 install django`
--- `pip3 install django-cart`
--- `python3 manage.py migrate --run-syncdb`
--- `python3 manage.py makemigrations cart`
--- `python3 manage.py migrate cart`
--- `python3 manage.py makemigrations webshop`
--- `python3 manage.py migrate webshop`
+-- `pip3 install django` . 
+-- `pip3 install django-cart` . 
+-- `python3 manage.py migrate --run-syncdb` . 
+-- `python3 manage.py makemigrations cart` . 
+-- `python3 manage.py migrate cart` . 
+-- `python3 manage.py makemigrations webshop` . 
+-- `python3 manage.py migrate webshop` . 
 
--- `python manage.py createsuperuser`, to add admin users for /admin  
+-- `python3 manage.py createsuperuser`, to add admin users for /admin  
 -- `docker-compose up`  
 
 - Run in web browser on localhost:8000
