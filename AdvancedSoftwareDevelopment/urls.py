@@ -18,4 +18,3 @@ urlpatterns = [
     url(r'^buy/$',views.remove_all_from_cart,name='Buy'),
 
 ]
-

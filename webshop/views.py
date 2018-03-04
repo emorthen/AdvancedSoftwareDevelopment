@@ -101,9 +101,9 @@ class ProductSearchListView(ProductListView):
                        (Q(country__icontains=q) for q in query_list))
                  )
         if queryMinPrice:
-            result.filter(Q(price__gte=queryMinPrice))
+            result = result.filter(Q(price__gte=queryMinPrice))
 
         if queryMaxPrice:
-            result.filter(Q(price__lte=queryMaxPrice))
+            result = result.filter(Q(price__lte=queryMaxPrice))
 
         return result
