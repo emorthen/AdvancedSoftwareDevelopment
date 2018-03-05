@@ -11,8 +11,7 @@ The database is local, so you have to add products that will be displayed in the
 - Run Docker
 - From root of project:  
 -- `pip3 install django`  
--- `pip3 install django-cart`  
--- `python3 manage.py migrate --run-syncdb`  
+-- `pip3 install django-cart`    
 -- `python3 manage.py makemigrations cart`  
 -- `python3 manage.py migrate cart`  
 -- `python3 manage.py makemigrations webshop`  
@@ -31,7 +30,6 @@ The database is local, so you have to add products that will be displayed in the
 * From root of project: 
   * `pip install django` 
   * `pip install django-cart`
-  * `python manage.py migrate --run-syncdb`
   * `python manage.py makemigrations cart`
   * `python manage.py migrate cart`
   * `python manage.py makemigrations webshop`  
