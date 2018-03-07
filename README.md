@@ -1,4 +1,4 @@
-# AdvancedSoftwareDevelopment
+# AdvancedSoftwareDevelopment Group 9
 A smooth webshop to buy and sell rockets. To the moon!
 The database is local, so you have to add products that will be displayed in the webshop. This can be done on localhost:8000/admin (log in with the superuser you created in the terminal as discribed below).
 
