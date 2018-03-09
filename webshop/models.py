@@ -2,7 +2,7 @@ from django.db import models
 from datetime import datetime
 
 # Create your models here.
-
+# Ha med forklaring her på modell
 class Product(models.Model):
     # id automatically added by django
     #productID = models.CharField(max_length=10, primary_key=True)
