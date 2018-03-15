@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>{{ "Purchase completed" }}</h1>
+    <h1>Purchase completed</h1>
         <p>Congratulations! Your purchase have been completed.</p>
 
     <hr/>
-        <button class="btn btn-primary" onclick="location.href={% url 'webshop:product-list' %}">Back to product list</button>
+
+    <a class="btn btn-primary" href={% url 'webshop:product-list' %}>Back to product list</a>
  {% endblock %}
