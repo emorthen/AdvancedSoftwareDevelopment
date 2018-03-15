@@ -71,15 +71,21 @@ def get_discounted_price(discount_string, total_price):
     return str(discounted_price)
 
 
-class ProductListView(LoginRequiredMixin, ListView):
+@login_required
+def product_list_view(request):
+    product_list = Product.objects.all()
 
-    model = Product
-    template_name = 'product-list.html'
-    context_object_name = 'product-list'
-    login_url = 'login'
+    return render(request, 'product-list.html', {'product-list': product_list})
 
-    def get_queryset(self):
-        return Product.objects.all()
+
+# class ProductListView(LoginRequiredMixin, ListView):
+#
+#     model = Product
+#     template_name = 'product-list.html'
+#     context_object_name = 'product-list'
+#
+#     def get_queryset(self):
+#         return Product.objects.all()
 
 
 @login_required
@@ -89,14 +95,14 @@ def product_detail_view(request, productID):
     return render(request, 'product-details.html', {'object': product, 'discounted_price': discounted_price})
 
 
-class ProductSearchListView(ProductListView):
+class ProductSearchListView(ListView):
     """
     Display a Blog List page filtered by the search query.
     """
     paginate_by = 10
 
     def get_queryset(self):
-        result = super(ProductSearchListView, self).get_queryset()
+        result = product_list_view()
         queryText = self.request.GET.get('q')
         queryMinPrice = self.request.GET.get('minprice')
         queryMaxPrice = self.request.GET.get('maxprice')
