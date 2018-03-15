@@ -5,7 +5,7 @@ from django.core.validators import MinValueValidator
 class Product(models.Model):
     name = models.CharField(max_length=100)
     brand = models.CharField(max_length=100)
-    height = models.PositiveIntegerField()
+    height = models.DecimalField(max_digits=5, decimal_places=2, validators=[MinValueValidator(0)])
     country = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=18, decimal_places=2, validators=[MinValueValidator(0)])
     description = models.CharField(max_length=500)
