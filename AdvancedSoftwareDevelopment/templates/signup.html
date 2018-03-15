@@ -11,11 +11,10 @@
                 {% for field in form %}
                     <p>
                         {{ field.label_tag }}<br>
-                        {{ field }}
+                        {{ field }}</p>
                         {% for error in field.errors %}
                             <p style="color: red">{{ error }}</p>
                         {% endfor %}
-                    </p>
                 {% endfor %}
                 <div class="form-group">
                     <label>Already have an account? </label>
