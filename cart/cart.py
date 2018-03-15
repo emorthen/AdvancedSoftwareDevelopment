@@ -3,6 +3,7 @@ import cart.models as models
 
 CART_ID = 'CART-ID'
 
+
 class ItemAlreadyExists(Exception):
     pass
 
