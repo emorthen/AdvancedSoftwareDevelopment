@@ -53,7 +53,7 @@ def remove_from_cart(request, product_id):
 
 @login_required
 def remove_all_from_cart(request):
-    cart= Cart(request)
+    cart = Cart(request)
     cart.clear()
     return render(request,'purchase-completed.html')
 
@@ -88,6 +88,7 @@ def product_detail_view(request, productID):
 @login_required
 def product_search_list_view(request):
     result = Product.objects.all()
+    print(result)
     query_text = request.GET.get('q')
     query_min_price = request.GET.get('minprice')
     query_max_price = request.GET.get('maxprice')
