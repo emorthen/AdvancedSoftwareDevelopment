@@ -75,7 +75,7 @@ def get_discounted_price(discount_string, total_price):
 def product_list_view(request):
     product_list = Product.objects.all()
 
-    return render(request, 'product-list.html', {'product-list': product_list})
+    return render(request, 'product-list.html', {'product_list': product_list})
 
 
 # class ProductListView(LoginRequiredMixin, ListView):
@@ -92,7 +92,7 @@ def product_list_view(request):
 def product_detail_view(request, productID):
     product = Product.objects.get(id=productID)
     discounted_price = get_discounted_price(product.discount, product.price)
-    return render(request, 'product-details.html', {'object': product, 'discounted_price': discounted_price})
+    return render(request, 'product-details.html', {'product': product, 'discounted_price': discounted_price})
 
 
 class ProductSearchListView(ListView):

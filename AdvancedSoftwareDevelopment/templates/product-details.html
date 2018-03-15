@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>{{ object.name }}</h1>
-        <p>Height: {{ object.height }} m</p>
-        <p>Brand: {{ object.brand }}</p>
-        <p>Country: {{ object.country }}</p>
-        <p>Price: ${{ object.price }}</p>
-        <p>Description: {{ object.description }}</p>
-        {% if not object.discount == '-' %}
-            <p class="card-text" style="color: darkred">Discount: {{ object.discount }}</p>
-            {% if not object.discount == '3 for 2' or not object.discount == '2 for 1' %}
+    <h1>{{ product.name }}</h1>
+        <p>Height: {{ product.height }} m</p>
+        <p>Brand: {{ product.brand }}</p>
+        <p>Country: {{ product.country }}</p>
+        <p>Price: ${{ product.price }}</p>
+        <p>Description: {{ product.description }}</p>
+        {% if not product.discount == '-' %}
+            <p class="card-text" style="color: darkred">Discount: {{ product.discount }}</p>
+            {% if not product.discount == '3 for 2' or not product.discount == '2 for 1' %}
                 <p>Discounted price: ${{ discounted_price }}</p>
             {% endif %}
         {% endif %}
 
-        <a class="btn btn-primary" href="{% url 'add_to_cart' object.id %}">Add to cart</a>
+        <a class="btn btn-primary" href="{% url 'add_to_cart' product.id %}">Add to cart</a>
         <hr/>
         <p><button class="btn btn-primary" onclick="location.href={% url 'product-list' %}">Back to product list</button></p>
  {% endblock %}
