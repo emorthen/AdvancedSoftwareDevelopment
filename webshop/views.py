@@ -3,7 +3,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from cart.cart import Cart
 from webshop.models import Product
 from functools import reduce
@@ -78,16 +77,6 @@ def product_list_view(request):
     return render(request, 'product-list.html', {'product_list': product_list})
 
 
-# class ProductListView(LoginRequiredMixin, ListView):
-#
-#     model = Product
-#     template_name = 'product-list.html'
-#     context_object_name = 'product-list'
-#
-#     def get_queryset(self):
-#         return Product.objects.all()
-
-
 @login_required
 def product_detail_view(request, productID):
     product = Product.objects.get(id=productID)
@@ -95,33 +84,60 @@ def product_detail_view(request, productID):
     return render(request, 'product-details.html', {'product': product, 'discounted_price': discounted_price})
 
 
-class ProductSearchListView(ListView):
-    """
-    Display a Blog List page filtered by the search query.
-    """
-    paginate_by = 10
+@login_required
+def product_search_list_view(request):
+    result = Product.objects.all()
+    query_text = request.GET.get('q')
+    query_min_price = request.GET.get('minprice')
+    query_max_price = request.GET.get('maxprice')
+    if query_text:
+        query_list = query_text.split()
+        result = result.filter(
+            reduce(operator.and_,
+                   (Q(brand__icontains=q) for q in query_list)) |
+            reduce(operator.and_,
+                   (Q(description__icontains=q) for q in query_list)) |
+            reduce(operator.and_,
+                   (Q(name__icontains=q) for q in query_list)) |
+            reduce(operator.and_,
+                   (Q(country__icontains=q) for q in query_list))
+        )
+    if query_min_price:
+        result = result.filter(Q(price__gte=query_min_price))
 
-    def get_queryset(self):
-        result = product_list_view()
-        queryText = self.request.GET.get('q')
-        queryMinPrice = self.request.GET.get('minprice')
-        queryMaxPrice = self.request.GET.get('maxprice')
-        if queryText:
-            query_list = queryText.split()
-            result = result.filter(
-                reduce(operator.and_,
-                       (Q(brand__icontains=q) for q in query_list)) |
-                reduce(operator.and_,
-                       (Q(description__icontains=q) for q in query_list)) |
-                reduce(operator.and_,
-                       (Q(name__icontains=q) for q in query_list)) |
-                reduce(operator.and_,
-                       (Q(country__icontains=q) for q in query_list))
-                 )
-        if queryMinPrice:
-            result = result.filter(Q(price__gte=queryMinPrice))
+    if query_max_price:
+        result = result.filter(Q(price__lte=query_max_price))
 
-        if queryMaxPrice:
-            result = result.filter(Q(price__lte=queryMaxPrice))
+    return render(request, 'product-list.html', {'product_list': result})
 
-        return result
+
+# class ProductSearchListView(ListView):
+#     """
+#     Display a Blog List page filtered by the search query.
+#     """
+#     paginate_by = 10
+#
+#     def get_queryset(self):
+#         result = product_list_view()
+#         queryText = self.request.GET.get('q')
+#         queryMinPrice = self.request.GET.get('minprice')
+#         queryMaxPrice = self.request.GET.get('maxprice')
+#         if queryText:
+#             query_list = queryText.split()
+#             result = result.filter(
+#                 reduce(operator.and_,
+#                        (Q(brand__icontains=q) for q in query_list)) |
+#                 reduce(operator.and_,
+#                        (Q(description__icontains=q) for q in query_list)) |
+#                 reduce(operator.and_,
+#                        (Q(name__icontains=q) for q in query_list)) |
+#                 reduce(operator.and_,
+#                        (Q(country__icontains=q) for q in query_list))
+#                  )
+#         if queryMinPrice:
+#             result = result.filter(Q(price__gte=queryMinPrice))
+#
+#         if queryMaxPrice:
+#             result = result.filter(Q(price__lte=queryMaxPrice))
+#
+#         return result
