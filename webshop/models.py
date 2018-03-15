@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 
 
 class Product(models.Model):
@@ -6,7 +7,7 @@ class Product(models.Model):
     brand = models.CharField(max_length=100)
     height = models.PositiveIntegerField()
     country = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=18, decimal_places=2)
+    price = models.DecimalField(max_digits=18, decimal_places=2, validators=[MinValueValidator(0)])
     description = models.CharField(max_length=500)
 
     NO_DISCOUNT = '-'
