@@ -58,6 +58,7 @@ def remove_all_from_cart(request):
     return render(request,'purchase-completed.html')
 
 
+@login_required
 def get_cart(request):
     return render(request, 'cart.html', dict(cart=Cart(request)))
 
@@ -110,34 +111,3 @@ def product_search_list_view(request):
 
     return render(request, 'product-list.html', {'product_list': result})
 
-
-# class ProductSearchListView(ListView):
-#     """
-#     Display a Blog List page filtered by the search query.
-#     """
-#     paginate_by = 10
-#
-#     def get_queryset(self):
-#         result = product_list_view()
-#         queryText = self.request.GET.get('q')
-#         queryMinPrice = self.request.GET.get('minprice')
-#         queryMaxPrice = self.request.GET.get('maxprice')
-#         if queryText:
-#             query_list = queryText.split()
-#             result = result.filter(
-#                 reduce(operator.and_,
-#                        (Q(brand__icontains=q) for q in query_list)) |
-#                 reduce(operator.and_,
-#                        (Q(description__icontains=q) for q in query_list)) |
-#                 reduce(operator.and_,
-#                        (Q(name__icontains=q) for q in query_list)) |
-#                 reduce(operator.and_,
-#                        (Q(country__icontains=q) for q in query_list))
-#                  )
-#         if queryMinPrice:
-#             result = result.filter(Q(price__gte=queryMinPrice))
-#
-#         if queryMaxPrice:
-#             result = result.filter(Q(price__lte=queryMaxPrice))
-#
-#         return result
