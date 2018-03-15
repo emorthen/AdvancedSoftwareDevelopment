@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
+{% url 'webshop:index' %}
 <!-- Entry page for login -->
 
 {% block content %}
 
   <h1>Sky is not the Limit!</h1>
 
-  <a class="btn btn-primary" href={% url 'product-list' %}>Start shopping spaceships!</a>
+  <a class="btn btn-primary" href={% url 'webshop:product-list' %}>Start shopping spaceships!</a>
+
 {% endblock %}
 

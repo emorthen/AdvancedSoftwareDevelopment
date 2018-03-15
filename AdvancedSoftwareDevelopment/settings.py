@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.99.101', '192.168.99.100','0.0.0.0']
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'webshop:index'
 LOGOUT_REDIRECT_URL = 'login'
 
 # Application definition

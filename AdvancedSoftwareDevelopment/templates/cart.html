@@ -23,12 +23,12 @@
             <td>${{ item.product.price }}</td>
             <td>{{ item.product.discount }}</td>
             <td>${{ item.total_price }}</td>
-            <td><a class="btn btn-danger" href="{% url 'remove_from_cart' item.object_id %}"><i class="fas fa-trash-alt fa-xs"></i></a></td>
+            <td><a class="btn btn-danger" href="{% url 'webshop:remove_from_cart' item.object_id %}"><i class="fas fa-trash-alt fa-xs"></i></a></td>
         </tr>
         {% endfor %}
     </table>
 
-    <a class="btn btn-primary" href="{% url 'Buy' %}">Buy</a>
+    <a class="btn btn-primary" href="{% url 'webshop:Buy' %}">Buy</a>
 {% else %}
     <p>Your cart is empty.</p>
 
