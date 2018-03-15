@@ -12,25 +12,25 @@
     <body>
 
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 20px">
-          <a class="navbar-brand" href={% url 'index' %}>Sky is not the limit</a>
+          <a class="navbar-brand" href={% url 'webshop:index' %}>Sky is not the limit</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href={% url 'index' %}>Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href={% url 'webshop:index' %}>Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href={% url 'product-list' %}>Products</a>
+                        <a class="nav-link" href={% url 'webshop:product-list' %}>Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href={% url 'cart' %}>Shopping cart</a>
+                        <a class="nav-link" href={% url 'webshop:cart' %}>Shopping cart</a>
                     </li>
                 </ul>
 
               <ul class="navbar-nav">
-                <li> <a class="nav-link" href={% url 'logout' %}><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                <li> <a class="nav-link" href={% url 'webshop:logout' %}><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
 
           </div>
