@@ -37,3 +37,7 @@ class Product(models.Model):
     )
 
     discount = models.CharField(max_length=11, choices=DISCOUNT_CHOICES, default=NO_DISCOUNT)
+
+    def __str__(self):
+        return self.name
+
