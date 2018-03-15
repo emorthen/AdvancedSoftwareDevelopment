@@ -88,7 +88,6 @@ def product_detail_view(request, productID):
 @login_required
 def product_search_list_view(request):
     result = Product.objects.all()
-    print(result)
     query_text = request.GET.get('q')
     query_min_price = request.GET.get('min_price')
     query_max_price = request.GET.get('max_price')
