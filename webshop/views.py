@@ -36,8 +36,8 @@ def signup(request):
 
 
 @login_required
-def add_to_cart(request, productID):
-    product = Product.objects.get(id=productID)
+def add_to_cart(request, product_id):
+    product = Product.objects.get(id=product_id)
     cart = Cart(request)
     cart.add(product, product.price, 1)
     return redirect('webshop:cart')
@@ -55,7 +55,7 @@ def remove_from_cart(request, product_id):
 def remove_all_from_cart(request):
     cart = Cart(request)
     cart.clear()
-    return render(request,'purchase-completed.html')
+    return render(request, 'purchase-completed.html')
 
 
 @login_required
@@ -79,8 +79,8 @@ def product_list_view(request):
 
 
 @login_required
-def product_detail_view(request, productID):
-    product = Product.objects.get(id=productID)
+def product_detail_view(request, product_id):
+    product = Product.objects.get(id=product_id)
     discounted_price = get_discounted_price(product.discount, product.price)
     return render(request, 'product-details.html', {'product': product, 'discounted_price': discounted_price})
 
@@ -90,8 +90,8 @@ def product_search_list_view(request):
     result = Product.objects.all()
     print(result)
     query_text = request.GET.get('q')
-    query_min_price = request.GET.get('minprice')
-    query_max_price = request.GET.get('maxprice')
+    query_min_price = request.GET.get('min_price')
+    query_max_price = request.GET.get('max_price')
     if query_text:
         query_list = query_text.split()
         result = result.filter(
@@ -111,4 +111,3 @@ def product_search_list_view(request):
         result = result.filter(Q(price__lte=query_max_price))
 
     return render(request, 'product-list.html', {'product_list': result})
-
