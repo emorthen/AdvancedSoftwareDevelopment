@@ -67,7 +67,7 @@ def get_discounted_price(discount_string, total_price):
     discounted_price = total_price
     if '%' in discount_string:
         discount_percent = int(discount_string.split('%')[0])
-        discounted_price = int(total_price) - (int(total_price) * discount_percent / 100)
+        discounted_price = int(total_price) - int(total_price) * discount_percent / 100
     return discounted_price
 
 
