@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2>Products:</h2>
-    <form method="get" action="{% url 'product_search_list_view' %}" accept-charset="utf-8">
+    <form method="get" action="{% url 'webshop:product_search_list_view' %}" accept-charset="utf-8">
       <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
       <input class="searchfield" id="minPrice" name="minprice" type="number" placeholder="Min Price">
       <input class="searchfield" id="maxPrice" name="maxprice" type="number" placeholder="Max Price">
@@ -20,8 +20,8 @@
                     {% if not object.discount == '-' %}
                         <p class="card-text" style="color: darkred">Discount: {{ object.discount }}</p>
                     {% endif %}
-                    <a class="card-link" href="{% url 'product-details' object.id %}">View</a>
-                    <a class="card-link" href="{% url 'add_to_cart' object.id %}">Add to cart</a>
+                    <a class="card-link" href="{% url 'webshop:product-details' object.id %}">View</a>
+                    <a class="card-link" href="{% url 'webshop:add_to_cart' object.id %}">Add to cart</a>
                 </div>
             </div>
 
