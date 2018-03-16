@@ -127,7 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = PROJECT_PATH + '/webshop/static'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'webshop/static'),
 ]

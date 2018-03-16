@@ -15,10 +15,11 @@ local_settings.py
 migrations/
 db.sqlite3
 
+### Static files ### (?)
+AdvancedSoftwareDevelopment/webshop/static/admin/
 # Byte-compiled / optimized / DLL files
 .idea/
 
 .vs/slnx.sqlite
 
 *.sqlite
-
