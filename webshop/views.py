@@ -12,12 +12,12 @@ import operator
 
 @login_required
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'pages/index.html')
 
 
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect('pages/login')
 
 
 def signup(request):
@@ -29,10 +29,10 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('index')
+            return redirect('webshop:index')
     else:
         form = UserCreationForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'pages/signup.html', {'form': form})
 
 
 @login_required
@@ -55,12 +55,12 @@ def remove_from_cart(request, product_id):
 def remove_all_from_cart(request):
     cart = Cart(request)
     cart.clear()
-    return render(request, 'purchase-completed.html')
+    return render(request, 'pages/purchase-completed.html')
 
 
 @login_required
 def get_cart(request):
-    return render(request, 'cart.html', dict(cart=Cart(request)))
+    return render(request, 'pages/cart.html', dict(cart=Cart(request)))
 
 
 def get_discounted_price(discount_string, total_price):
@@ -75,14 +75,14 @@ def get_discounted_price(discount_string, total_price):
 def product_list_view(request):
     product_list = Product.objects.all()
 
-    return render(request, 'product-list.html', {'product_list': product_list})
+    return render(request, 'pages/product-list.html', {'product_list': product_list})
 
 
 @login_required
 def product_detail_view(request, productID):
     product = Product.objects.get(id=productID)
     discounted_price = get_discounted_price(product.discount, product.price)
-    return render(request, 'product-details.html', {'product': product, 'discounted_price': discounted_price})
+    return render(request, 'pages/product-details.html', {'product': product, 'discounted_price': discounted_price})
 
 
 @login_required
@@ -109,4 +109,4 @@ def product_search_list_view(request):
     if query_max_price:
         result = result.filter(Q(price__lte=query_max_price))
 
-    return render(request, 'product-list.html', {'product_list': result})
+    return render(request, 'pages/product-list.html', {'product_list': result})
