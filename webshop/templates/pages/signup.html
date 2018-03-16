@@ -1,0 +1,28 @@
+﻿{% extends 'default.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4 login-form">
+                <h1>Sign up</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <p>
+                        {{ field.label_tag }}<br>
+                        {{ field }}
+                    </p>
+                    {% for error in field.errors %}
+                    <p style="color: red">{{ error }}</p>
+                    {% endfor %}
+                    {% endfor %}
+                    <div class="form-group">
+                        <label>Already have an account? </label>
+                        <a href="{% url 'login' %}">Login</a>
+                    </div>
+                    <button class="btn btn-success btn-block" type="submit">Sign up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<html>
+<head>
+    <title>Default (.html) </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">    <meta charset="UTF-8">
+    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/webshop.css' %}">
+</head>
+<body>
+    <div class="page-header loginout">
+        <a href="/login">Login</a>
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
