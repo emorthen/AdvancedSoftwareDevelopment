@@ -13,7 +13,7 @@ The database is local, so you have to add products that will be displayed in the
 * Download Docker: https://store.docker.com/editions/community/docker-ce-desktop-mac.
 * Run Docker
 * From root of project:  
-  -- `./setup`
+  -- `./setup`  
   -- `docker-compose up web`
 * Run in web browser on localhost:8000
 
