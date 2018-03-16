@@ -41,7 +41,3 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-
-class ShoppingCart(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, unique=True)
-    quantity = models.IntegerField(max_length=100, validators=[MinValueValidator(0)])
