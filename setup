@@ -1,0 +1,10 @@
+#!/bin/bash
+
+pip3 install django=1.11.0
+pip3 install django-cart
+docker-compose run web python3 manage.py makemigrations
+docker-compose run web python3 manage.py makemigrations webshop cart
+docker-compose run web python3 manage.py migrate
+echo " "
+echo "### CREATING DJANGO ADMIN ###"
+docker-compose run web python3 manage.py createsuperuser
