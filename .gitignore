@@ -17,3 +17,8 @@ db.sqlite3
 
 # Byte-compiled / optimized / DLL files
 .idea/
+
+.vs/slnx.sqlite
+
+*.sqlite
+
