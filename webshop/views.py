@@ -2,8 +2,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.views.generic.list import ListView
-from cart.cart import Cart
+from webshop.cart import Cart
 from webshop.models import Product
 from functools import reduce
 from django.db.models import Q
