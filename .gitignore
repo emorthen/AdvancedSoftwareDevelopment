@@ -23,3 +23,5 @@ AdvancedSoftwareDevelopment/webshop/static/admin/
 .vs/slnx.sqlite
 
 *.sqlite
+*.suo
+

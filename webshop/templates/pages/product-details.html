@@ -1,0 +1,20 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+<h1>{{ product.name }}</h1>
+<p>Height: {{ product.height }} m</p>
+<p>Brand: {{ product.brand }}</p>
+<p>Country: {{ product.country }}</p>
+<p>Price: ${{ product.price }}</p>
+<p>Description: {{ product.description }}</p>
+        {% if not product.discount == '-' %}
+<p class="card-text" style="color: darkred">Discount: {{ product.discount }}</p>
+            {% if not product.discount == '3 for 2' or not product.discount == '2 for 1' %}
+<p>Discounted price: ${{ discounted_price }}</p>
+            {% endif %}
+        {% endif %}
+
+
+<a class="btn btn-primary" href="{% url 'webshop:add_to_cart' product.id %}">Add to cart</a>
+<hr />
+<a class="btn btn-primary" href={% url 'webshop:product-list' %}>Back to product list</a>
+ {% endblock %}

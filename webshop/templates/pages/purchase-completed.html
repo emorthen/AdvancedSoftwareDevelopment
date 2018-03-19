@@ -1,0 +1,9 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+<h1>Purchase completed</h1>
+<p>Congratulations! Your purchase have been completed.</p>
+
+<hr />
+
+<a class="btn btn-primary" href={% url 'webshop:product-list' %}>Back to product list</a>
+ {% endblock %}

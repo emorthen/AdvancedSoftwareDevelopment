@@ -1,20 +1,20 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">    <meta charset="UTF-8">
+﻿{% extends 'layouts/default.html' %}
 
-
-
-  <div class="container">
+{% block content %}
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-4 login-form">
             <h1>Sign up</h1>
             <form method="post">
                 {% csrf_token %}
                 {% for field in form %}
-                    <p>
-                        {{ field.label_tag }}<br>
-                        {{ field }}</p>
-                        {% for error in field.errors %}
-                            <p style="color: red">{{ error }}</p>
-                        {% endfor %}
+                <p>
+                    {{ field.label_tag }}<br>
+                    {{ field }}
+                </p>
+                {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+                {% endfor %}
                 {% endfor %}
                 <div class="form-group">
                     <label>Already have an account? </label>
@@ -25,4 +25,4 @@
         </div>
     </div>
 </div>
-
+{% endblock %}
