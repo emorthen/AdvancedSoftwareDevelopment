@@ -79,8 +79,8 @@ def product_list_view(request):
 
 
 @login_required
-def product_detail_view(request, product_id):
-    product = Product.objects.get(id=product_id)
+def product_detail_view(request, productID):
+    product = Product.objects.get(id=productID)
     discounted_price = get_discounted_price(product.discount, product.price)
     return render(request, 'product-details.html', {'product': product, 'discounted_price': discounted_price})
 
