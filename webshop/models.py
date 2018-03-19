@@ -53,8 +53,23 @@ class Product(models.Model):
         (DBS, 'DBS')
     )
 
-    discount = models.CharField(max_length=11, choices=DISCOUNT_CHOICES, default=NO_DISCOUNT)
+    NO_COUNTRY = '-'
+    USA = 'US&A'
+    RASSIA = 'Rassia'
+    NORTHKOREA = 'North Korea'
+    SOUTHTRONDELAG = 'South Trondelag'
+
+    COUNTRY_CHOICES = (
+        (NO_COUNTRY, '-'),
+        (USA, 'US&A'),
+        (RASSIA, 'Rassia'),
+        (NORTHKOREA, 'North Korea'),
+        (SOUTHTRONDELAG, 'South Trondelag')
+    )
+
     brand = models.CharField(max_length=30, choices=BRAND_CHOICES, default=NO_BRAND)
+    country = models.CharField(max_length=11, choices=COUNTRY_CHOICES, default=NO_COUNTRY)
+    discount = models.CharField(max_length=11, choices=DISCOUNT_CHOICES, default=NO_DISCOUNT)
 
     def __str__(self):
         return self.name
