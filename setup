@@ -1,10 +1,15 @@
 #!/bin/bash
-
+echo " "
+echo "### INSTALLING DJANGO ###"
 pip3 install django==1.11.0
-pip3 install django-cart
+echo " "
+echo "### FIXING MIGRATIONS ###"
 docker-compose run web python3 manage.py makemigrations
-docker-compose run web python3 manage.py makemigrations webshop cart
+docker-compose run web python3 manage.py makemigrations webshop
 docker-compose run web python3 manage.py migrate
+docker-compose run web python3 manage.py migrate webshop
+echo " "
+echo "### COLLECTING STATIC ###"
 docker-compose run web python3 manage.py collectstatic --noinput
 echo " "
 echo "### CREATING DJANGO ADMIN ###"
