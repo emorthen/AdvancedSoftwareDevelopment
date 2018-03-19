@@ -6,7 +6,6 @@ from django.contrib.contenttypes.models import ContentType
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    brand = models.CharField(max_length=100)
     height = models.DecimalField(max_digits=5, decimal_places=2, validators=[MinValueValidator(0)])
     country = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=18, decimal_places=2, validators=[MinValueValidator(0)])
@@ -38,7 +37,24 @@ class Product(models.Model):
         (FIVE_PERCENT, '5%')
     )
 
+    NO_BRAND = '-'
+    APOLLO = 'APPOLLO'
+    ROSCOCOSMOS = 'ROSCOCOSMOS'
+    SpaceX = 'SpaceX'
+    VOLVO = 'VOLVO'
+    DBS = 'DBS'
+
+    BRAND_CHOICES = (
+        (NO_BRAND, '-'),
+        (APOLLO, 'APOLLO'),
+        (ROSCOCOSMOS, 'ROSCOCOSMOS'),
+        (SpaceX, 'SpaceX'),
+        (VOLVO, 'VOLVO'),
+        (DBS, 'DBS')
+    )
+
     discount = models.CharField(max_length=11, choices=DISCOUNT_CHOICES, default=NO_DISCOUNT)
+    brand = models.CharField(max_length=30, choices=BRAND_CHOICES, default=NO_BRAND)
 
     def __str__(self):
         return self.name
