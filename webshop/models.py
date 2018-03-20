@@ -66,7 +66,7 @@ class Product(models.Model):
         (SOUTHTRONDELAG, 'South Trondelag')
     )
 
-    brand = models.CharField(max_length=10, choices=BRAND_CHOICES, default=NO_BRAND)
+    brand = models.CharField(max_length=11, choices=BRAND_CHOICES, default=NO_BRAND)
     country = models.CharField(max_length=15, choices=COUNTRY_CHOICES, default=NO_COUNTRY)
     discount = models.CharField(max_length=11, choices=DISCOUNT_CHOICES, default=NO_DISCOUNT)
 
