@@ -103,8 +103,8 @@ def product_detail_view(request, productID):
 def product_search_list_view(request):
     result = Product.objects.all()
     query_text = request.GET.get('q')
-    query_min_price = request.GET.get('min_price')
-    query_max_price = request.GET.get('max_price')
+    query_min_price = request.GET.get('minprice')
+    query_max_price = request.GET.get('maxprice')
     if query_text:
         query_list = query_text.split()
         result = result.filter(

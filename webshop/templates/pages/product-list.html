@@ -12,23 +12,28 @@
     </button>
 </form>
 
-        {% for product in product_list %}
+  {% for product in product_list %}
+    {% if forloop.first %}<div class="row">{% endif %}
+      <div class="col-sm-6">
+        <div class="card" style="width: 18rem; margin: 20px">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">${{ product.price|intcomma }}</h6>
+                <p class="card-text">{{ product.description }}</p>
+                {% if not product.discount == '-' %}
+                <p class="card-text" style="color: darkred">Discount: {{ product.discount }}</p>
+                {% endif %}
+                <a class="card-link" href="{% url 'webshop:product-details' product.id %}">View</a>
+                <a class="card-link" href="{% url 'webshop:add_to_cart' product.id %}">Add to cart</a>
+            </div>
+        </div>
+      </div>
+      {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
+      {% if forloop.last %}</div>{% endif %}
 
-<div class="card" style="width: 18rem; margin: 20px">
-    <div class="card-body">
-        <h5 class="card-title">{{ product.name }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">${{ product.price|intcomma }}</h6>
-        <p class="card-text">{{ product.description }}</p>
-        {% if not product.discount == '-' %}
-        <p class="card-text" style="color: darkred">Discount: {{ product.discount }}</p>
-        {% endif %}
-        <a class="card-link" href="{% url 'webshop:product-details' product.id %}">View</a>
-        <a class="card-link" href="{% url 'webshop:add_to_cart' product.id %}">Add to cart</a>
-    </div>
-</div>
 
 
-            {% empty %}
-<li>No products to show.</li>
-        {% endfor %}
+      {% empty %}
+      <li>No products to show.</li>
+  {% endfor %}
  {% endblock %}
