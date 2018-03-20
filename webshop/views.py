@@ -56,6 +56,21 @@ def remove_all_from_cart(request):
     cart.clear()
     return render(request, 'pages/purchase-completed.html')
 
+@login_required
+def increase_in_cart(request, product_id, quantity):
+    product = Product.objects.get(id=product_id)
+    quantity = int(quantity) + 1
+    cart = Cart(request)
+    cart.update(product, quantity, product.price)
+    return redirect('webshop:cart')
+
+@login_required
+def decrease_in_cart(request, product_id, quantity):
+    product = Product.objects.get(id=product_id)
+    cart = Cart(request)
+    quantity = int(quantity) - 1
+    cart.update(product, quantity, product.price)
+    return redirect('webshop:cart')
 
 @login_required
 def get_cart(request):
