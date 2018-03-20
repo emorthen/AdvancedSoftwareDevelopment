@@ -4,6 +4,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 
 
+class Order(models.Model):
+    
+
+
 class Product(models.Model):
     name = models.CharField(max_length=100)
     height = models.DecimalField(max_digits=5, decimal_places=2, validators=[MinValueValidator(0)])
