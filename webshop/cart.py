@@ -34,7 +34,19 @@ class Cart:
         request.session[CART_ID] = cart.id
         return cart
 
+    def check_if_discount(self,product):
+        product = product
+        if product.NO_DISCOUNT:
+            print('has no discount')
+            #return True
+        #elif product:
+        #    print('40%')
+        print('have discount')
+        #return False
+
+
     def add(self, product, unit_price, quantity=1):
+        #self.check_if_discount(product)
         try:
             item = models.Item.objects.get(
                 cart=self.cart,
@@ -94,4 +106,5 @@ class Cart:
     def clear(self):
         for item in self.cart.item_set.all():
             item.delete()
+
 
