@@ -25,3 +25,4 @@ AdvancedSoftwareDevelopment/webshop/static/admin/
 *.sqlite
 *.suo
 
+.vs/VSWorkspaceState.json
