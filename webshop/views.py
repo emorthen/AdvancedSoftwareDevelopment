@@ -37,9 +37,15 @@ def signup(request):
 @login_required
 def add_to_cart(request, product_id):
     product = Product.objects.get(id=product_id)
-    cart = Cart(request)
-    cart.add(product, product.price, 1)
-    return redirect('webshop:cart')
+    if (product.stock >= 1):
+        cart = Cart(request)
+        cart.add(product, product.price, 1)
+        product.errortext = ''
+        product.save()
+        return redirect('webshop:cart')
+    product.errortext = 'Not enough items available in stock!'
+    product.save()
+    return redirect('webshop:product-list')
 
 
 @login_required
@@ -65,8 +71,9 @@ def make_purchase(request):
 def increase_in_cart(request, product_id, quantity):
     product = Product.objects.get(id=product_id)
     quantity = int(quantity) + 1
-    cart = Cart(request)
-    cart.update(product, quantity, product.price)
+    if (product.stock >= quantity):
+        cart = Cart(request)
+        cart.update(product, quantity, product.price)
     return redirect('webshop:cart')
 
 @login_required

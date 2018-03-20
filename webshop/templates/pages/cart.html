@@ -24,6 +24,7 @@
             <a class="btn btn-primary" href="{% url 'webshop:increase_in_cart' item.object_id item.quantity %}"><i class="fas fa-plus"></i></a>
             {{ item.quantity }}
             <a class="btn btn-primary" href="{% url 'webshop:decrease_in_cart' item.object_id item.quantity %}"><i class="fas fa-minus"></i></a>
+            <p>In stock: {{item.product.stock}}</p>
         </td>
         <td>${{ item.product.price|intcomma }}</td>
         <td>{{ item.product.discount }}</td>
