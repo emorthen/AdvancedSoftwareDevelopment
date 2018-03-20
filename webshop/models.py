@@ -68,7 +68,7 @@ class Product(models.Model):
     )
 
     brand = models.CharField(max_length=11, choices=BRAND_CHOICES, default=NO_BRAND)
-    country = models.CharField(max_length=15, choices=COUNTRY_CHOICES, default=NO_COUNTRY)
+    country = models.CharField(max_length=30, choices=COUNTRY_CHOICES, default=NO_COUNTRY)
     discount = models.CharField(max_length=11, choices=DISCOUNT_CHOICES, default=NO_DISCOUNT)
 
     def __str__(self):
