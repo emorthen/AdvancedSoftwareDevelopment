@@ -12,6 +12,7 @@
 <p>Discounted price: ${{ discounted_price }}</p>
             {% endif %}
         {% endif %}
+  <p>{{ product.stock }} in stock</p>
 
 
 <a class="btn btn-primary" href="{% url 'webshop:add_to_cart' product.id %}">Add to cart</a>
