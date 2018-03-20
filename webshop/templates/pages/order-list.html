@@ -1,0 +1,32 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+
+<h2>My orders</h2>
+
+
+{% if order_list.count > 0 %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Product name</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    {% for order in order_list %}
+    <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.product.name }}</td>
+        <td>{{ order.status_field }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+<p>You have no orders yet.</p>
+
+{% endif %}
+
+
+{% endblock %}
