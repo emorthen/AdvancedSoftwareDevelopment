@@ -1,4 +1,5 @@
 {% extends 'layouts/base.html' %}
+{% load humanize %}
 
 {% block content %}
 
@@ -24,9 +25,9 @@
             {{ item.quantity }}
             <a class="btn btn-primary" href="{% url 'webshop:decrease_in_cart' item.object_id item.quantity %}"><i class="fas fa-minus"></i></a>
         </td>
-        <td>${{ item.product.price }}</td>
+        <td>${{ item.product.price|intcomma }}</td>
         <td>{{ item.product.discount }}</td>
-        <td>${{ item.total_price }}</td>
+        <td>${{ item.total_price|intcomma }}</td>
         <td><a class="btn btn-danger" href="{% url 'webshop:remove_from_cart' item.object_id %}"><i class="fas fa-trash-alt fa-xs"></i></a></td>
     </tr>
     {% endfor %}
