@@ -2,10 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
-
-
-class Order(models.Model):
-    
+from django.contrib.auth.models import User
 
 
 class Product(models.Model):
@@ -77,6 +74,27 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Order(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    ORDER_CONFIRMED = 'Order confirmed'
+    ORDER_ACCEPTED = 'Order accepted'
+    READY_FOR_TRANSPORTATION = 'Order ready for transportation'
+    ORDER_SENT = 'Order sent'
+
+    STATUS_CHOICES = (
+        (ORDER_CONFIRMED, 'Order confirmed'),
+        (ORDER_ACCEPTED, 'Order accepted'),
+        (READY_FOR_TRANSPORTATION, 'Order ready for transportation'),
+        (ORDER_SENT, 'Order sent')
+    )
+    status_field = models.CharField(max_length=30, choices=STATUS_CHOICES, default=ORDER_CONFIRMED)
+
+    def __str__(self):
+        return str(self.id)
 
 
 class Cart(models.Model):
