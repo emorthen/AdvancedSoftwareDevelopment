@@ -26,6 +26,7 @@
                 <p class="card-text">{{ product.stock }} left</p>
                 <a class="card-link" href="{% url 'webshop:product-details' product.id %}">View</a>
                 <a class="card-link" href="{% url 'webshop:add_to_cart' product.id %}">Add to cart</a>
+                <p class="card-text" style="color: darkred">{{ product.errortext }} </p>
             </div>
         </div>
       </div>
