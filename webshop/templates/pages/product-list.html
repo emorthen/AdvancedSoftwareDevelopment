@@ -23,6 +23,7 @@
                 {% if not product.discount == '-' %}
                 <p class="card-text" style="color: darkred">Discount: {{ product.discount }}</p>
                 {% endif %}
+                <p class="card-text">{{ product.stock }} left</p>
                 <a class="card-link" href="{% url 'webshop:product-details' product.id %}">View</a>
                 <a class="card-link" href="{% url 'webshop:add_to_cart' product.id %}">Add to cart</a>
             </div>

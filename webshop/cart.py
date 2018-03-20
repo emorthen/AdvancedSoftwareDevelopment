@@ -79,6 +79,9 @@ class Cart:
                 item.quantity = int(quantity)
                 item.save()
 
+    def get_products(self):
+        return self.cart.item_set.all()
+
     def count(self):
         result = 0
         for item in self.cart.item_set.all():

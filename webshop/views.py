@@ -51,8 +51,13 @@ def remove_from_cart(request, product_id):
 
 
 @login_required
-def remove_all_from_cart(request):
+def make_purchase(request):
     cart = Cart(request)
+    products_in_cart = cart.get_products()
+    for item in products_in_cart:
+        product = Product.objects.get(id=item.product.id)
+        product.stock = product.stock - item.quantity
+        product.save()
     cart.clear()
     return render(request, 'pages/purchase-completed.html')
 
