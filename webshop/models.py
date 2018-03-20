@@ -10,6 +10,7 @@ class Product(models.Model):
     country = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=18, decimal_places=2, validators=[MinValueValidator(0)])
     description = models.CharField(max_length=500)
+    stock = models.PositiveIntegerField(default=10)
 
     NO_DISCOUNT = '-'
     THREE_FOR_TWO = '3 for 2'
