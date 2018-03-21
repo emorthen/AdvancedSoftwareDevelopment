@@ -79,7 +79,7 @@ class Product(models.Model):
         discounted_price = self.price
         if '%' in self.discount:
             discount_percent = int(self.discount.split('%')[0])
-            discounted_price = int(self.price) - (int(self.price) * discount_percent / 100)
+            discounted_price = self.price - (self.price * discount_percent / 100)
         return discounted_price
 
 
@@ -123,10 +123,6 @@ class Item(models.Model):
     def __unicode__(self):
         return u'%d units of %s' % (self.quantity, self.product.__class__.__name__)
 
-    def total_price(self):
-        return self.quantity * self.unit_price
-    total_price = property(total_price)
-
     # product
     def get_product(self):
         return self.content_type.get_object_for_this_type(pk=self.object_id)
@@ -136,4 +132,17 @@ class Item(models.Model):
         self.object_id = product.pk
 
     product = property(get_product, set_product)
+
+    def has_discounted_price(self):
+        return self.product.get_discounted_price() < self.product.price
+
+    def get_discounted_price(self):
+        return self.product.get_discounted_price()
+    discounted_price = property(get_discounted_price)
+
+    def total_price(self):
+        if self.has_discounted_price():
+            return self.quantity * self.get_discounted_price()
+        return self.quantity * self.unit_price
+    total_price = property(total_price)
 
