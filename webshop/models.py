@@ -82,6 +82,12 @@ class Product(models.Model):
             discounted_price = self.price - (self.price * discount_percent / 100)
         return discounted_price
 
+    def has_discounted_price(self):
+        return self.get_discounted_price() < self.price
+
+    def has_package_deal(self):
+        return 'for' in self.discount
+
 
 class Cart(models.Model):
     creation_date = models.DateTimeField(verbose_name=_('creation date'))
@@ -133,16 +139,20 @@ class Item(models.Model):
 
     product = property(get_product, set_product)
 
-    def has_discounted_price(self):
-        return self.product.get_discounted_price() < self.product.price
-
     def get_discounted_price(self):
         return self.product.get_discounted_price()
-    discounted_price = property(get_discounted_price)
+
+    def get_package_deal_price(self, total_price):
+        if self.product.has_package_deal():
+            multiple = self.quantity // int(self.product.discount[0])
+            return total_price - (multiple * self.unit_price)
+        return total_price
 
     def total_price(self):
-        if self.has_discounted_price():
-            return self.quantity * self.get_discounted_price()
-        return self.quantity * self.unit_price
+        total_price = self.quantity * self.unit_price
+        if self.product.has_discounted_price():
+            total_price = self.quantity * self.get_discounted_price()
+        elif self.product.has_package_deal():
+            total_price = self.get_package_deal_price(total_price)
+        return total_price
     total_price = property(total_price)
-
