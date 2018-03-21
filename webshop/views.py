@@ -37,7 +37,7 @@ def signup(request):
 @login_required
 def add_to_cart(request, product_id):
     product = Product.objects.get(id=product_id)
-    if (product.stock >= 1):
+    if product.stock >= 1:
         cart = Cart(request)
         cart.add(product, product.price, 1)
         product.errortext = ''
@@ -67,14 +67,16 @@ def make_purchase(request):
     cart.clear()
     return render(request, 'pages/purchase-completed.html')
 
+
 @login_required
 def increase_in_cart(request, product_id, quantity):
     product = Product.objects.get(id=product_id)
     quantity = int(quantity) + 1
-    if (product.stock >= quantity):
+    if product.stock >= quantity:
         cart = Cart(request)
         cart.update(product, quantity, product.price)
     return redirect('webshop:cart')
+
 
 @login_required
 def decrease_in_cart(request, product_id, quantity):
@@ -84,17 +86,10 @@ def decrease_in_cart(request, product_id, quantity):
     cart.update(product, quantity, product.price)
     return redirect('webshop:cart')
 
+
 @login_required
 def get_cart(request):
     return render(request, 'pages/cart.html', dict(cart=Cart(request)))
-
-
-def get_discounted_price(discount_string, total_price):
-    discounted_price = total_price
-    if '%' in discount_string:
-        discount_percent = int(discount_string.split('%')[0])
-        discounted_price = int(total_price) - (int(total_price) * discount_percent / 100)
-    return discounted_price
 
 
 @login_required
@@ -107,7 +102,7 @@ def product_list_view(request):
 @login_required
 def product_detail_view(request, productID):
     product = Product.objects.get(id=productID)
-    discounted_price = get_discounted_price(product.discount, product.price)
+    discounted_price = product.get_discounted_price()
     return render(request, 'pages/product-details.html', {'product': product, 'discounted_price': discounted_price})
 
 
