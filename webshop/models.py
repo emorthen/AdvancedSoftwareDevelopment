@@ -75,6 +75,13 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def get_discounted_price(self):
+        discounted_price = self.price
+        if '%' in self.discount:
+            discount_percent = int(self.discount.split('%')[0])
+            discounted_price = int(self.price) - (int(self.price) * discount_percent / 100)
+        return discounted_price
+
 
 class Cart(models.Model):
     creation_date = models.DateTimeField(verbose_name=_('creation date'))
