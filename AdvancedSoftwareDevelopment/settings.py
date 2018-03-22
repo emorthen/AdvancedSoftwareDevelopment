@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 file = open(BASE_DIR+"/SECRETKEY.txt", 'r')
-SECRET_KEY = file.read(52)
+SECRET_KEY = file.readline()
 file.close()
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -32,6 +32,14 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.99.101', '192.168.99.100', '
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'webshop:index'
 LOGOUT_REDIRECT_URL = 'login'
+
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = 'Spennendeprosjekt1'
+EMAIL_HOST_USER = 'tdt4242skyisnotthelimit@gmail.com'
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Application definition
 

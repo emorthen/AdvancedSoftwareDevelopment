@@ -81,6 +81,12 @@ class Cart:
                 item.quantity = int(quantity)
                 item.save()
 
+    def get_product(self):
+        products = []
+        for item in self.cart.item_set.all():
+            products.append(item.get_product())
+        return products
+
     def get_products(self):
         return self.cart.item_set.all()
 
