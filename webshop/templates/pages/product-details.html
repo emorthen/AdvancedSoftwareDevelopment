@@ -13,7 +13,8 @@
 <p>Discounted price: ${{ discounted_price|intcomma }}</p>
             {% endif %}
         {% endif %}
-  <p>{{ product.stock }} in stock</p>
+ <p>{{ product.stock }} in stock</p>
+ <p class="card-text" style="color: darkred">{{ product.errortext }} </p>
 
 
 <a class="btn btn-primary" href="{% url 'webshop:add_to_cart' product.id %}">Add to cart</a>
