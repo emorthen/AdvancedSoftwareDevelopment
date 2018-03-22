@@ -26,6 +26,7 @@ The database is local, so you have to add products that will be displayed in the
   * If you don't have VirtualBox installed already, you will also need to choose that.
 * Open the Docker Quickstart Terminal, and let it do its thing. (If you didn't download Git together with Docker, you will have to point to the correct location for the Git Bash).
   * You should get a message saying "Docker is up and running!".
+* Place SECRETKEY.txt, which is given to you personally, into the root of the project
 * From root of project:
   * `pip install django`
   * `pip install django-cart`
@@ -46,3 +47,4 @@ The database is local, so you have to add products that will be displayed in the
     * `docker-machine.exe env tdt4242`
     * `$ eval $(...)`
 * In your browser, go to _[VM ip address]:8000_, ex _192.168.99.100:8000_. If you don't remember the ip address, it can be found by running the command `docker-machine ip nameOfVM`. You should now see the login page!
+* To add products to the site, go to admin/webshop/product/add/
