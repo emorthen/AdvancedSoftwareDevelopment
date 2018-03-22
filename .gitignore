@@ -17,6 +17,8 @@ db.sqlite3
 
 ### Static files ### (?)
 AdvancedSoftwareDevelopment/webshop/static/admin/
+/webshop/static/admin/
+
 # Byte-compiled / optimized / DLL files
 .idea/
 
