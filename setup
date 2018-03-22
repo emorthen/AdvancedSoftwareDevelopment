@@ -1,8 +1,5 @@
 #!/bin/bash
 echo " "
-echo "### INSTALLING DJANGO ###"
-pip3 install django==1.11.0
-echo " "
 echo "### FIXING MIGRATIONS ###"
 docker-compose run web python3 manage.py makemigrations
 docker-compose run web python3 manage.py makemigrations webshop
@@ -12,5 +9,5 @@ echo " "
 echo "### COLLECTING STATIC ###"
 docker-compose run web python3 manage.py collectstatic --noinput
 echo " "
-echo "### CREATING DJANGO ADMIN ###"
+echo "### CREATING DJANGO ADMIN: Leave 'Email address' empty ###"
 docker-compose run web python3 manage.py createsuperuser
