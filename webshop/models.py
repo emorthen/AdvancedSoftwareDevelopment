@@ -109,25 +109,30 @@ class Order(models.Model):
     )
     status_field = models.CharField(max_length=30, choices=STATUS_CHOICES, default=ORDER_CONFIRMED)
 
+    # helper field to compare status before and after an order update
     __original_status = None
 
     def __init__(self, *args, **kwargs):
         super(Order, self).__init__(*args, **kwargs)
         self.__original_status = self.status_field
 
+    # override save method to be able to check if status field has been updated
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         if self.status_field != self.__original_status:
-            send_mail(
-                'Your order at SkyIsNotTheLimit has changed',
-                'Hello!\n\nYour order at SkyIsNotTheLimit has changed status. '
-                'Log in and see my orders for more details.',
-                settings.EMAIL_HOST_USER,
-                [self.user.username],
-                fail_silently=False
-            )
-
+            self.send_update_email()
         super(Order, self).save(force_insert, force_update, *args, **kwargs)
         self.__original_status = self.status_field
+
+    # send update email to user when the status of an order has been updated
+    def send_update_email(self):
+        send_mail(
+            'Your order at SkyIsNotTheLimit has changed',
+            'Hello!\n\nYour order at SkyIsNotTheLimit has changed status. '
+            'Log in and see my orders for more details.',
+            settings.EMAIL_HOST_USER,
+            [self.user.username],
+            fail_silently=False
+        )
 
     def __str__(self):
         return str(self.id)
@@ -146,6 +151,7 @@ class Cart(models.Model):
         return unicode(self.creation_date)
 
 
+# Helper class for getting the items in the cart
 class ItemManager(models.Manager):
     def get(self, *args, **kwargs):
         if 'product' in kwargs:
@@ -155,6 +161,7 @@ class ItemManager(models.Manager):
         return super(ItemManager, self).get(*args, **kwargs)
 
 
+# An Item represents an entry in the shopping cart
 class Item(models.Model):
     cart = models.ForeignKey(Cart, verbose_name=_('cart'), on_delete=models.CASCADE,)
     quantity = models.PositiveIntegerField(verbose_name=_('quantity'))
