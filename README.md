@@ -17,6 +17,7 @@ The database is local, so you have to add products that will be displayed in the
   -- `./setup`  
   -- `docker-compose up web`
 * Run in web browser on localhost:8000
+* To add products to the site, go to admin/webshop/product/add/
 
 ## For Windows 10 (not Pro):
 

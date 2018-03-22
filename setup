@@ -9,5 +9,5 @@ echo " "
 echo "### COLLECTING STATIC ###"
 docker-compose run web python3 manage.py collectstatic --noinput
 echo " "
-echo "### CREATING DJANGO ADMIN ###"
+echo "### CREATING DJANGO ADMIN: Leave 'Email address' empty ###"
 docker-compose run web python3 manage.py createsuperuser
