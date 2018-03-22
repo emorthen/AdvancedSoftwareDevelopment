@@ -12,6 +12,7 @@ The database is local, so you have to add products that will be displayed in the
 
 * Download Docker: https://store.docker.com/editions/community/docker-ce-desktop-mac.
 * Run Docker
+* Place SECRETKEY.txt, which is given to you personally, into the root of the project
 * From root of project:  
   -- `./setup`  
   -- `docker-compose up web`
