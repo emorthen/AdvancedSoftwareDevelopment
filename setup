@@ -1,8 +1,5 @@
 #!/bin/bash
 echo " "
-echo "### INSTALLING DJANGO ###"
-pip3 install django==1.11.0
-echo " "
 echo "### FIXING MIGRATIONS ###"
 docker-compose run web python3 manage.py makemigrations
 docker-compose run web python3 manage.py makemigrations webshop
