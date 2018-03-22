@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from webshop.cart import Cart
 from webshop.models import Product, Order
+import webshop.models as models
 from functools import reduce
 from django.db.models import Q
 import operator
@@ -49,12 +50,20 @@ def remove_from_cart(request, product_id):
     cart.remove(product)
     return redirect('webshop:cart')
 
+
 @login_required
 def add_order(request):
     products = dict(cart=Cart(request))['cart'].get_product()
-    print(products)
     for product in products:
-        product.add_order()
+        order = models.Order(product=product, user=request.user)
+        order.save()
+
+
+@login_required
+def order_view(request):
+    current_user = request.user
+    order_list = Order.objects.filter(user=current_user)
+    return render(request, 'pages/order-list.html', {'order_list': order_list})
 
 
 @login_required
@@ -117,12 +126,3 @@ def product_search_list_view(request):
         result = result.filter(Q(price__lte=query_max_price))
 
     return render(request, 'pages/product-list.html', {'product_list': result})
-
-@login_required
-def order_view(request):
-    order_list = Order.objects.all()
-    return render(request, 'pages/order-list.html', {'order_list': order_list})
-
-
-
-

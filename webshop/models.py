@@ -74,23 +74,23 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-
-    def add_order(self):
-    # try:
-    #     order = models.Order.objects.get(
-    #         id=self.id,
-    #     )
-        order = models.Order(product=self)
-        #order.id = self.id
-       #order.product = self
-        order.save()
-
-    # else: #ItemAlreadyExists
+    #
+    # def add_order(self):
+    # # try:
+    # #     order = models.Order.objects.get(
+    # #         id=self.id,
+    # #     )
+    #     order = models.Order(product=self)
+    #     #order.id = self.id
+    #    #order.product = self
     #     order.save()
+    #
+    # # else: #ItemAlreadyExists
+    # #     order.save()
 
 
 class Order(models.Model):
-    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     ORDER_CONFIRMED = 'Order confirmed'
