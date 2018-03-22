@@ -60,37 +60,46 @@ def remove_from_cart(request, product_id):
 
 
 @login_required
-def add_order(request):
-    products = dict(cart=Cart(request))['cart'].get_product()
-    for product in products:
-        order = models.Order(product=product, user=request.user)
-        order.save()
-
-
-@login_required
 def order_view(request):
     current_user = request.user
     order_list = Order.objects.filter(user=current_user)
     return render(request, 'pages/order-list.html', {'order_list': order_list})
 
 
-@login_required
-def purchase(request):
-    cart = Cart(request)
-    add_order(request)
-    products_in_cart = cart.get_products()
-    for item in products_in_cart:
-        product = Product.objects.get(id=item.product.id)
-        product.stock = product.stock - item.quantity
-        product.save()
-    cart.clear()
+def add_order(product, user):
+    order = models.Order(product=product, user=user)
+    order.save()
+
+
+def update_stock(product, quantity):
+    product.stock = product.stock - quantity
+    product.save()
+
+
+def send_confirmation_email(user):
     send_mail(
         'Your purchase at SkyIsNotTheLimit',
         'Hello!\n\nYour purchase at SkyIsNotTheLimit is confirmed. Se my orders for more details.',
         settings.EMAIL_HOST_USER,
-        [request.user.username],
+        [user.username],
         fail_silently=False
     )
+
+
+@login_required
+def purchase(request):  # update stock, clear cart and send confirmation email to the user
+    cart = Cart(request)
+    products_in_cart = cart.get_products()
+
+    for item in products_in_cart:
+        product = Product.objects.get(id=item.product.id)
+
+        update_stock(product, item.quantity)
+        add_order(product, request.user)
+
+    cart.clear()
+    send_confirmation_email(request.user)
+
     return render(request, 'pages/purchase-completed.html')
 
 
