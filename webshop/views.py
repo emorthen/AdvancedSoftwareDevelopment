@@ -8,6 +8,8 @@ import webshop.models as models
 from functools import reduce
 from django.db.models import Q
 import operator
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 @login_required
@@ -71,6 +73,13 @@ def purchase(request):
     cart = Cart(request)
     add_order(request)
     cart.clear()
+    send_mail(
+        'Your purchase at SkyIsNotTheLimit',
+        'Hello!\n\nYour purchase at SkyIsNotTheLimit is confirmed. Se my orders for more details.',
+        settings.EMAIL_HOST_USER,
+        [request.user.email],
+        fail_silently=False
+    )
     return render(request, 'pages/purchase-completed.html')
 
 
