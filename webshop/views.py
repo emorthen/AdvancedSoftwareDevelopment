@@ -3,10 +3,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from webshop.cart import Cart
-from webshop.models import Product
+from webshop.models import Product, Order
+import webshop.models as models
 from functools import reduce
 from django.db.models import Q
 import operator
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 @login_required
@@ -57,14 +60,37 @@ def remove_from_cart(request, product_id):
 
 
 @login_required
-def make_purchase(request):
+def add_order(request):
+    products = dict(cart=Cart(request))['cart'].get_product()
+    for product in products:
+        order = models.Order(product=product, user=request.user)
+        order.save()
+
+
+@login_required
+def order_view(request):
+    current_user = request.user
+    order_list = Order.objects.filter(user=current_user)
+    return render(request, 'pages/order-list.html', {'order_list': order_list})
+
+
+@login_required
+def purchase(request):
     cart = Cart(request)
+    add_order(request)
     products_in_cart = cart.get_products()
     for item in products_in_cart:
         product = Product.objects.get(id=item.product.id)
         product.stock = product.stock - item.quantity
         product.save()
     cart.clear()
+    send_mail(
+        'Your purchase at SkyIsNotTheLimit',
+        'Hello!\n\nYour purchase at SkyIsNotTheLimit is confirmed. Se my orders for more details.',
+        settings.EMAIL_HOST_USER,
+        [request.user.username],
+        fail_silently=False
+    )
     return render(request, 'pages/purchase-completed.html')
 
 

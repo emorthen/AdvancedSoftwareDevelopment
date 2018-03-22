@@ -15,5 +15,6 @@ urlpatterns = [
     url(r'^increase_in_cart/(\d+)/(\d+)/$', views.increase_in_cart, name='increase_in_cart'),
     url(r'^decrease_in_cart/(\d+)/(\d+)/$', views.decrease_in_cart, name='decrease_in_cart'),
     url(r'^product_search_list_view/$', views.product_search_list_view, name='product_search_list_view'),
-    url(r'^buy/$', views.make_purchase, name='Buy'),
+    url(r'^buy/$', views.purchase, name='Buy'),
+    url(r'^my_orders/$', views.order_view, name='orders')
 ]
