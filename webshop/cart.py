@@ -87,6 +87,9 @@ class Cart:
             products.append(item.get_product())
         return products
 
+    def get_products(self):
+        return self.cart.item_set.all()
+
     def count(self):
         result = 0
         for item in self.cart.item_set.all():
