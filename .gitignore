@@ -27,4 +27,4 @@ AdvancedSoftwareDevelopment/webshop/static/admin/
 
 .vs/VSWorkspaceState.json
 
-secret_key_file
+SECRETKEY
