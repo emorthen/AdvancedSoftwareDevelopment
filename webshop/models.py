@@ -3,6 +3,8 @@ from django.core.validators import MinValueValidator
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 class Product(models.Model):
@@ -74,19 +76,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-    #
-    # def add_order(self):
-    # # try:
-    # #     order = models.Order.objects.get(
-    # #         id=self.id,
-    # #     )
-    #     order = models.Order(product=self)
-    #     #order.id = self.id
-    #    #order.product = self
-    #     order.save()
-    #
-    # # else: #ItemAlreadyExists
-    # #     order.save()
 
 
 class Order(models.Model):
@@ -105,6 +94,26 @@ class Order(models.Model):
         (ORDER_SENT, 'Order sent')
     )
     status_field = models.CharField(max_length=30, choices=STATUS_CHOICES, default=ORDER_CONFIRMED)
+
+    __original_status = None
+
+    def __init__(self, *args, **kwargs):
+        super(Order, self).__init__(*args, **kwargs)
+        self.__original_status = self.status_field
+
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        if self.status_field != self.__original_status:
+            send_mail(
+                'Your order at SkyIsNotTheLimit has changed',
+                'Hello!\n\nYour order at SkyIsNotTheLimit has changed status. '
+                'Log in and see my orders for more details.',
+                settings.EMAIL_HOST_USER,
+                [self.user.username],
+                fail_silently=False
+            )
+
+        super(Order, self).save(force_insert, force_update, *args, **kwargs)
+        self.__original_status = self.status_field
 
     def __str__(self):
         return str(self.id)

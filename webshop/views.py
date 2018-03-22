@@ -77,7 +77,7 @@ def purchase(request):
         'Your purchase at SkyIsNotTheLimit',
         'Hello!\n\nYour purchase at SkyIsNotTheLimit is confirmed. Se my orders for more details.',
         settings.EMAIL_HOST_USER,
-        [request.user.email],
+        [request.user.username],
         fail_silently=False
     )
     return render(request, 'pages/purchase-completed.html')
