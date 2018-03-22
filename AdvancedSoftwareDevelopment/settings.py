@@ -20,7 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(=p-vwv!z_208%=m@3x5u#wj*%!+*tyitwxz))re3+hn@1#^oy'
+file = open(BASE_DIR+"/SECRETKEY.txt", 'r')
+SECRET_KEY = file.read(52)
+file.close()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -48,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'webshop.apps.WebshopConfig'
 ]
 
@@ -70,7 +73,7 @@ PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [PROJECT_PATH + '/templates'],
+        'DIRS': [BASE_DIR + '/webshop/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,7 +137,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = PROJECT_PATH + '/webshop/static'
+STATIC_ROOT = BASE_DIR + '/webshop/static'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'webshop/static'),
 ]

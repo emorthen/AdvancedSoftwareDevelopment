@@ -10,9 +10,10 @@ from django.conf import settings
 class Product(models.Model):
     name = models.CharField(max_length=100)
     height = models.DecimalField(max_digits=5, decimal_places=2, validators=[MinValueValidator(0)])
-    country = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=18, decimal_places=2, validators=[MinValueValidator(0)])
     description = models.CharField(max_length=500)
+    stock = models.PositiveIntegerField(default=10)
+    errortext = models.CharField(max_length=100, blank=True, default='')
 
     NO_DISCOUNT = '-'
     THREE_FOR_TWO = '3 for 2'
@@ -70,12 +71,25 @@ class Product(models.Model):
         (SOUTHTRONDELAG, 'South Trondelag')
     )
 
-    brand = models.CharField(max_length=30, choices=BRAND_CHOICES, default=NO_BRAND)
-    country = models.CharField(max_length=11, choices=COUNTRY_CHOICES, default=NO_COUNTRY)
+    brand = models.CharField(max_length=11, choices=BRAND_CHOICES, default=NO_BRAND)
+    country = models.CharField(max_length=30, choices=COUNTRY_CHOICES, default=NO_COUNTRY)
     discount = models.CharField(max_length=11, choices=DISCOUNT_CHOICES, default=NO_DISCOUNT)
 
     def __str__(self):
         return self.name
+
+    def get_discounted_price(self):
+        discounted_price = self.price
+        if '%' in self.discount:
+            discount_percent = int(self.discount.split('%')[0])
+            discounted_price = self.price - (self.price * discount_percent / 100)
+        return discounted_price
+
+    def has_discounted_price(self):
+        return self.get_discounted_price() < self.price
+
+    def has_package_deal(self):
+        return 'for' in self.discount
 
 
 class Order(models.Model):
@@ -159,10 +173,6 @@ class Item(models.Model):
     def __unicode__(self):
         return u'%d units of %s' % (self.quantity, self.product.__class__.__name__)
 
-    def total_price(self):
-        return self.quantity * self.unit_price
-    total_price = property(total_price)
-
     # product
     def get_product(self):
         return self.content_type.get_object_for_this_type(pk=self.object_id)
@@ -173,3 +183,20 @@ class Item(models.Model):
 
     product = property(get_product, set_product)
 
+    def get_discounted_price(self):
+        return self.product.get_discounted_price()
+
+    def get_package_deal_price(self, total_price):
+        if self.product.has_package_deal():
+            multiple = self.quantity // int(self.product.discount[0])
+            return total_price - (multiple * self.unit_price)
+        return total_price
+
+    def total_price(self):
+        total_price = self.quantity * self.unit_price
+        if self.product.has_discounted_price():
+            total_price = self.quantity * self.get_discounted_price()
+        elif self.product.has_package_deal():
+            total_price = self.get_package_deal_price(total_price)
+        return total_price
+    total_price = property(total_price)

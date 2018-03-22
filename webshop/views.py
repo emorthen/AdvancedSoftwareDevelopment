@@ -40,9 +40,15 @@ def signup(request):
 @login_required
 def add_to_cart(request, product_id):
     product = Product.objects.get(id=product_id)
-    cart = Cart(request)
-    cart.add(product, product.price, 1)
-    return redirect('webshop:cart')
+    if product.stock >= 1:
+        cart = Cart(request)
+        cart.add(product, product.price, 1)
+        product.errortext = ''
+        product.save()
+        return redirect('webshop:cart')
+    product.errortext = 'Not enough items available in stock!'
+    product.save()
+    return redirect('webshop:product-list')
 
 
 @login_required
@@ -72,6 +78,11 @@ def order_view(request):
 def purchase(request):
     cart = Cart(request)
     add_order(request)
+    products_in_cart = cart.get_products()
+    for item in products_in_cart:
+        product = Product.objects.get(id=item.product.id)
+        product.stock = product.stock - item.quantity
+        product.save()
     cart.clear()
     send_mail(
         'Your purchase at SkyIsNotTheLimit',
@@ -84,16 +95,27 @@ def purchase(request):
 
 
 @login_required
+def increase_in_cart(request, product_id, quantity):
+    product = Product.objects.get(id=product_id)
+    quantity = int(quantity) + 1
+    if product.stock >= quantity:
+        cart = Cart(request)
+        cart.update(product, quantity, product.price)
+    return redirect('webshop:cart')
+
+
+@login_required
+def decrease_in_cart(request, product_id, quantity):
+    product = Product.objects.get(id=product_id)
+    cart = Cart(request)
+    quantity = int(quantity) - 1
+    cart.update(product, quantity, product.price)
+    return redirect('webshop:cart')
+
+
+@login_required
 def get_cart(request):
     return render(request, 'pages/cart.html', dict(cart=Cart(request)))
-
-
-def get_discounted_price(discount_string, total_price):
-    discounted_price = total_price
-    if '%' in discount_string:
-        discount_percent = int(discount_string.split('%')[0])
-        discounted_price = int(total_price) - (int(total_price) * discount_percent / 100)
-    return discounted_price
 
 
 @login_required
@@ -106,7 +128,7 @@ def product_list_view(request):
 @login_required
 def product_detail_view(request, productID):
     product = Product.objects.get(id=productID)
-    discounted_price = get_discounted_price(product.discount, product.price)
+    discounted_price = product.get_discounted_price()
     return render(request, 'pages/product-details.html', {'product': product, 'discounted_price': discounted_price})
 
 
