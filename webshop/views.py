@@ -49,10 +49,18 @@ def remove_from_cart(request, product_id):
     cart.remove(product)
     return redirect('webshop:cart')
 
+@login_required
+def add_order(request):
+    products = dict(cart=Cart(request))['cart'].get_product()
+    print(products)
+    for product in products:
+        product.add_order()
+
 
 @login_required
-def remove_all_from_cart(request):
+def purchase(request):
     cart = Cart(request)
+    add_order(request)
     cart.clear()
     return render(request, 'pages/purchase-completed.html')
 
@@ -113,5 +121,8 @@ def product_search_list_view(request):
 @login_required
 def order_view(request):
     order_list = Order.objects.all()
-
     return render(request, 'pages/order-list.html', {'order_list': order_list})
+
+
+
+
