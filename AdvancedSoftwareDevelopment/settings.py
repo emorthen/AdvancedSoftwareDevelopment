@@ -25,7 +25,7 @@ SECRET_KEY = file.readline()
 file.close()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.99.101', '192.168.99.100', '0.0.0.0']
 
